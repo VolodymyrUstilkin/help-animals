@@ -16,16 +16,6 @@ const API_ANIMALS_REQUESTS_OPENED_URL = environment.serverHost + environment.api
 const API_ANIMALS_REQUESTS_CLOSED_URL = environment.serverHost + environment.apiUrl + '/closed-requests';
 const ADMIN_ANIMALS_FIND_REQUESTS_URL = '/admin/animals/find-requests';
 
-
-class AnimalFindRequest implements IAdminOpenedAnimalFindRequest {
-  id = '';
-  address = '';
-  closedData = '';
-  openedDate = '';
-  userClosedId = '';
-  userCreatedId = '';
-}
-
 @Component({
   selector: 'app-admin-animals-find-requests',
   templateUrl: './admin-animals-find-requests.component.html',
@@ -38,12 +28,12 @@ export class AdminAnimalsFindRequestsComponent implements OnDestroy {
   pagination: IPagination;
   newRequestAddress = '';
 
-  QueryFilterParamTypes = {
+  RequestParamTypes = {
     opened: 'opened',
     closed: 'closed'
   };
 
-  currentQueryFilterParams = this.QueryFilterParamTypes.opened;
+  currentRequestType = this.RequestParamTypes.opened;
 
   private querySubscription: Subscription;
 
@@ -52,14 +42,14 @@ export class AdminAnimalsFindRequestsComponent implements OnDestroy {
               private activatedRoute: ActivatedRoute,
               private router: Router) {
     this.pagination = new Pagination();
-    this.pagination.additionalParams = {type: this.QueryFilterParamTypes.opened};
+    this.pagination.additionalParams = {type: this.RequestParamTypes.opened};
     this.pagination.url = ADMIN_ANIMALS_FIND_REQUESTS_URL;
 
     this.querySubscription = this.activatedRoute.queryParams.subscribe(
       (queryParam: Params) => {
         this.pagination.page = queryParam.page || this.pagination.page;
         this.pagination.perPage = queryParam.per_page || this.pagination.perPage;
-        this.currentQueryFilterParams = queryParam.type || this.QueryFilterParamTypes.opened;
+        this.currentRequestType = queryParam.type || this.RequestParamTypes.opened;
         this.getAnimalsFindRequests();
       }
     );
@@ -70,11 +60,12 @@ export class AdminAnimalsFindRequestsComponent implements OnDestroy {
   }
 
   public getAnimalsFindRequests(): void {
-    const httpParams = new HttpParams();
-    httpParams.append('filter', this.currentQueryFilterParams);
-    httpParams.appendAll(this.pagination.getQueryParams());
+    const httpParams = new HttpParams().appendAll({
+      ...this.pagination.getQueryParams(),
+      type: this.currentRequestType
+    });
 
-    if (this.currentQueryFilterParams !== this.QueryFilterParamTypes.closed) {
+    if (this.currentRequestType !== this.RequestParamTypes.closed) {
       this.httpClient.get<IAdminOpenedAnimalFindRequestGetResponse[]>(API_ANIMALS_REQUESTS_OPENED_URL, {
         params: httpParams,
         observe: 'response'
@@ -118,7 +109,7 @@ export class AdminAnimalsFindRequestsComponent implements OnDestroy {
   }
 
   changeQueryFilterParams(type: string): void {
-    this.currentQueryFilterParams = type;
+    this.currentRequestType = type;
     this.pagination.additionalParams = {type};
     this.router.navigate([ADMIN_ANIMALS_FIND_REQUESTS_URL], {
       queryParams: {type}

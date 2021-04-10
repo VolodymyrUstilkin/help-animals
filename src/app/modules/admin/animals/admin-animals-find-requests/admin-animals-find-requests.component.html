@@ -10,15 +10,15 @@
 
 
   <div class="two-buttons-container">
-    <button class="button" [class.not-selected-button]="currentQueryFilterParams === QueryFilterParamTypes.closed"
-            (click)="changeQueryFilterParams(QueryFilterParamTypes.opened)">Відкриті
+    <button class="button" [class.not-selected-button]="currentRequestType === RequestParamTypes.closed"
+            (click)="changeQueryFilterParams(RequestParamTypes.opened)">Відкриті
     </button>
-    <button class="button" [class.not-selected-button]="currentQueryFilterParams === QueryFilterParamTypes.opened"
-            (click)="changeQueryFilterParams(QueryFilterParamTypes.closed)">Закриті
+    <button class="button" [class.not-selected-button]="currentRequestType === RequestParamTypes.opened"
+            (click)="changeQueryFilterParams(RequestParamTypes.closed)">Закриті
     </button>
   </div>
 
-  <section *ngIf=" currentQueryFilterParams === QueryFilterParamTypes.opened">
+  <section *ngIf=" currentRequestType === RequestParamTypes.opened">
     <table class="table">
       <tr>
         <th>id</th>
@@ -42,7 +42,7 @@
     </table>
   </section>
 
-  <section *ngIf="currentQueryFilterParams === QueryFilterParamTypes.closed">
+  <section *ngIf="currentRequestType === RequestParamTypes.closed">
     <table class="table">
       <tr>
         <th>id</th>
