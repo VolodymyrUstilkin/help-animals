@@ -7,7 +7,7 @@ export interface IAdminUserDetailsGetResponse {
   email: string;
 
   is_active: boolean;
-  permission_for_add_edit_and_remove_users: boolean;
+  permission_for_access_to_active_admin: boolean;
   permission_for_add_edit_and_remove_animals: boolean;
   permission_for_create_and_close_animal_requests: boolean;
 
