@@ -14,7 +14,7 @@ class AdminUserDetails implements IAdminUserDetails {
   login = '';
   name = '';
   permissionForAddEditAndRemoveAnimals = false;
-  permissionForAddEditAndRemoveUsers = false;
+  permissionForAccessToActiveAdmin = false;
   permissionForCreateAndCloseAnimalRequests = false;
   phone1 = '';
   phone2 = '';
@@ -56,7 +56,7 @@ export class AdminUserDetailsComponent implements AfterViewInit {
           email: res.email,
 
           isActive: res.is_active,
-          permissionForAddEditAndRemoveUsers: res.permission_for_add_edit_and_remove_users,
+          permissionForAccessToActiveAdmin: res.permission_for_add_edit_and_remove_users,
           permissionForAddEditAndRemoveAnimals: res.permission_for_add_edit_and_remove_animals,
           permissionForCreateAndCloseAnimalRequests: res.permission_for_create_and_close_animal_requests,
 

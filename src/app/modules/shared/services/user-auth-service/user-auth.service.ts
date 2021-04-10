@@ -6,20 +6,20 @@ import {Router} from '@angular/router';
 import {TokenAuthService} from '../token-auth-service/token-auth.service';
 
 const AUTHENTICATION_URL = environment.serverHost + environment.apiUrl + '/login';
-const GET_CURRENT_USER_URL = environment.fakeApiUrl + '/authUser';
+const GET_CURRENT_USER_API_URL = environment.serverHost + environment.apiUrl + '/authUser';
 
 const STORAGE_USER_NAME = 'authUser';
 
 export interface IUserAuthPermissions { //  todo maybe edit, if backend say
   isActive: boolean;
-  permissionForAddEditAndRemoveUsers: boolean;
+  permissionForAccessToActiveAdmin: boolean;
   permissionForAddEditAndRemoveAnimals: boolean;
   permissionForCreateAndCloseAnimalRequests: boolean;
 }
 
 export class UserAuthPermissionsDefault implements IUserAuthPermissions {
   isActive = false;
-  permissionForAddEditAndRemoveUsers = false;
+  permissionForAccessToActiveAdmin = false;
   permissionForAddEditAndRemoveAnimals = false;
   permissionForCreateAndCloseAnimalRequests = false;
 }
@@ -96,19 +96,20 @@ export class UserAuthService {
   }
 
   private loadUserFromServer(): void {
-    this.httpClient.get<{ user: IUser }>(GET_CURRENT_USER_URL).subscribe((res) => {
-        this.setUser(res.user);
-      }, err => {
-        console.log(err);
-      }
-    );
-  }
+    // this.httpClient.get<{ user: IUser }>(GET_CURRENT_USER_API_URL).subscribe((res) => {
+    //     this.setUser(res.user);
+    //   }, err => {
+    //     console.log(err);
+    //   }
+    // );
+    this.setUser({ // todo use real API instead
+      id: '0',
+      isActive: true,
+      permissionForAccessToActiveAdmin: true,
+      permissionForAddEditAndRemoveAnimals: true,
+      permissionForCreateAndCloseAnimalRequests: true
+    });
 
-  /**
-   * @deprecated use TokenAuthService.getToken() instead;
-   */
-  public getToken(): string {
-    return this.tokenAuthService.getToken();
   }
 
   public login(email: string, password: string): void {

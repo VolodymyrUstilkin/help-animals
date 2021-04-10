@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { UserAuthService } from 'src/app/modules/shared/services/user-auth-service/user-auth.service';
+import {environment} from '../../../../environments';
 
 const BASE_URL = '/';
 
@@ -82,13 +83,13 @@ export class NavigationUiComponent implements OnInit, OnDestroy, AfterViewInit{
       case 'desktop':
         if (user.permissionForCreateAndCloseAnimalRequests) this.adminMenuItems.push(new NavMenuItem('Повідомлення про знайдену тварину', BASE_URL + '/admin/animals/find-requests'));
         if (user.permissionForCreateAndCloseAnimalRequests) this.adminMenuItems.push(new NavMenuItem('Керування обліком тварин', BASE_URL + '/admin/animals/list'));
-        if (user.permissionForAddEditAndRemoveUsers) this.adminMenuItems.push(new NavMenuItem('Керування користувачами', BASE_URL + '/admin/users'));
+        this.adminMenuItems.push(new NavMenuItem('Керування користувачами', BASE_URL + '/admin/users'));
         this.adminMenuItems.push(new NavMenuItem('Вихiд', BASE_URL + 'login'));
         break;
       case 'mobile':
         if (user.permissionForCreateAndCloseAnimalRequests) this.publicMenuItems.push(new NavMenuItem('Повідомлення про знайдену тварину', BASE_URL + '/admin/animals/find-requests'));
         if (user.permissionForCreateAndCloseAnimalRequests) this.publicMenuItems.push(new NavMenuItem('Керування обліком тварин', BASE_URL + '/admin/animals/list'));
-        if (user.permissionForAddEditAndRemoveUsers) this.publicMenuItems.push(new NavMenuItem('Керування користувачами', BASE_URL + '/admin/users'));
+        this.publicMenuItems.push(new NavMenuItem('Керування користувачами', BASE_URL + '/admin/users'));
         this.publicMenuItems.push(new NavMenuItem('Вихiд', BASE_URL + 'login'));
         break;
       default:

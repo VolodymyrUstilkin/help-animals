@@ -13,7 +13,7 @@ export const convertResponseToUserList = (response: IAdminUserListGetResponseEle
         email: resp.email,
 
         isActive: resp.is_active,
-        permissionForAddEditAndRemoveUsers: resp.permission_for_add_edit_and_remove_users,
+        permissionForAccessToActiveAdmin: resp.permission_for_add_edit_and_remove_users,
         permissionForAddEditAndRemoveAnimals: resp.permission_for_add_edit_and_remove_animals,
         permissionForCreateAndCloseAnimalRequests: resp.permission_for_create_and_close_animal_requests,
 

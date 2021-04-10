@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   serverHost: 'http://localhost:3000',
   apiUrl: '/api/v1',
-  fakeApiUrl: 'http://localhost:3001'
+  activeAdminUrl: '/admin'
 };
 
 /*

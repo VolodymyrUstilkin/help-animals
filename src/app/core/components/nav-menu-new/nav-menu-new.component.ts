@@ -64,7 +64,7 @@ export class NavMenuNewComponent implements OnDestroy {
     if (user.permissionForCreateAndCloseAnimalRequests) {
       this.adminMenuItems.push(new NavMenuItem('Керування обліком тварин', BASE_URL + '/admin/animals/list'));
     }
-    if (user.permissionForAddEditAndRemoveUsers) {
+    if (user.permissionForAccessToActiveAdmin) {
       this.adminMenuItems.push(new NavMenuItem('Керування користувачами', BASE_URL + '/admin/users'));
     }
   }
