@@ -28,13 +28,13 @@
         <th>Закрити</th>
       </tr>
 
-      <tr *ngFor="let request of animalRequestList">
+      <tr *ngFor="let request of animalOpenedRequestList">
         <td>{{request.id}}</td>
         <td>{{request.address}}</td>
         <td>{{request.userCreatedId}}</td>
-        <td>{{request.openedData}}</td>
+        <td>{{request.openedDate}}</td>
         <td>
-          <button *ngIf="!request.userClosedId.toString()" class="button center-button"
+          <button class="button center-button"
                   (click)="closeAnimalFindRequest(request.id)">Закрити
           </button>
         </td>
@@ -53,13 +53,13 @@
         <th>Закрита</th>
       </tr>
 
-      <tr *ngFor="let request of animalRequestList">
+      <tr *ngFor="let request of animalClosedRequestList">
         <td>{{request.id}}</td>
         <td>{{request.address}}</td>
         <td>{{request.userCreatedId}}</td>
-        <td>{{request.openedData}}</td>
+        <td>{{request.openedDate}}</td>
         <td>{{request.userClosedId}}</td>
-        <td>{{request.closedData}}</td>
+        <td>{{request.closedDate}}</td>
       </tr>
     </table>
   </section>
