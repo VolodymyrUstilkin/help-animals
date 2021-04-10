@@ -1,6 +1,5 @@
 FROM ubuntu:latest
 
-#EXPOSE 4200 3001
 USER root
 WORKDIR /home/app
 

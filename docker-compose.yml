@@ -7,16 +7,5 @@ services:
     build: .
     ports:
       - 80:80
-    depends_on:
-      - fake_api
-    volumes:
-      - .:/home/app:rw
-
-  fake_api:
-    container_name: help_animals_fe_fake_api
-    command: npx json-server --watch ./api/db.json --host 0.0.0.0 --port 3001
-    build: .
-    ports:
-      - 3001:3001
     volumes:
       - .:/home/app:rw
