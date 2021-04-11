@@ -1,5 +1,5 @@
-import {IUserAuthResponse} from './IUserAuthResponse';
 import {IUserAuth} from '../user-auth.service';
+import {IUserAuthResponse} from './i-user-auth-response';
 
 export class Convertors {
   public static convertUserAuthResponseToUserAuth(response: IUserAuthResponse): IUserAuth {

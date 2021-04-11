@@ -1,6 +1,6 @@
-import {IUserAuthPermissions} from '../../../../shared/services/user-auth-service/user-auth.service';
+import {IUserAuthPermissions} from '../../../../shared/services/user-auth-service/models/i-user-auth-permissions';
 
-export interface IAdminUserListTableElement extends IUserAuthPermissions{
+export interface IAdminUserListTableElement extends IUserAuthPermissions {
   id: string;
   name: string;
   login: string;
