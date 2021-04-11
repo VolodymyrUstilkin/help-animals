@@ -20,6 +20,12 @@
 
 .menu__link .menu__link-image{
   padding-right: 5px;
+  pointer-events: none;
+}
+
+.menu__link .menu__link-text{
+  padding-right: 5px;
+  pointer-events: none;
 }
 
 .menu__link.active{

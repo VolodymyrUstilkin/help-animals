@@ -12,8 +12,6 @@ export class HeaderUiComponent implements AfterViewInit, OnDestroy {
   @ContentChild(NavigationUiComponent) child!: NavigationUiComponent
   @ViewChild('burger') burger!: ElementRef;
 
-  mobile = false;
-
   private subscription: Subscription = new Subscription();
 
   ngAfterViewInit(): void {
@@ -23,8 +21,7 @@ export class HeaderUiComponent implements AfterViewInit, OnDestroy {
       element.classList.toggle("_active");
       forbidenScroll?.classList.toggle('_lock');
 
-      this.mobile = !this.mobile;
-      this.child.active = this.mobile;
+      this.child.active = element.classList.contains('_active');
     }))
   }
 
