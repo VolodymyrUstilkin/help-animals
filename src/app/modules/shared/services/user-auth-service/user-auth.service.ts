@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs';
 import {environment} from '../../../../../environments';
 import {Router} from '@angular/router';
 import {TokenAuthService} from '../token-auth-service/token-auth.service';
+import {IUserAuthResponse} from './models/IUserAuthResponse';
+import {Convertors} from './models/Convertors';
 
 const AUTHENTICATION_URL = environment.serverHost + environment.apiUrl + '/login';
-const GET_CURRENT_USER_API_URL = environment.serverHost + environment.apiUrl + '/authUser';
+const GET_CURRENT_USER_API_URL = environment.serverHost + environment.apiUrl + '/login';
 
 const STORAGE_USER_NAME = 'authUser';
 
@@ -17,18 +19,18 @@ export interface IUserAuthPermissions { //  todo maybe edit, if backend say
   permissionForCreateAndCloseAnimalRequests: boolean;
 }
 
-export class UserAuthPermissionsDefault implements IUserAuthPermissions {
+class UserAuthPermissionsDefault implements IUserAuthPermissions {
   isActive = false;
   permissionForAccessToActiveAdmin = false;
   permissionForAddEditAndRemoveAnimals = false;
   permissionForCreateAndCloseAnimalRequests = false;
 }
 
-interface IUser extends IUserAuthPermissions {
+export interface IUserAuth extends IUserAuthPermissions {
   id: string;
 }
 
-class UserGuest extends UserAuthPermissionsDefault implements IUser {
+class UserGuest extends UserAuthPermissionsDefault implements IUserAuth {
   id = '';
 }
 
@@ -40,8 +42,8 @@ const userGuest = new UserGuest();
 
 export class UserAuthService {
 
-  private currentUser: IUser = userGuest;
-  public userUpdatedEvent: BehaviorSubject<IUser>;
+  private currentUser: IUserAuth = userGuest;
+  public userUpdatedEvent: BehaviorSubject<IUserAuth>;
 
   constructor(private httpClient: HttpClient, private router: Router, private tokenAuthService: TokenAuthService) {
     console.log('auth constructor start'); // todo remove
@@ -49,7 +51,7 @@ export class UserAuthService {
     console.log('auth constructor end');  // todo remove
   }
 
-  private static getUserFromStorage(): IUser | null {
+  private static getUserFromStorage(): IUserAuth | null {
     const userStr = localStorage.getItem(STORAGE_USER_NAME);
     if (userStr) {
       return environment.production ? JSON.parse(atob(userStr)) : JSON.parse(userStr);
@@ -59,19 +61,23 @@ export class UserAuthService {
 
   public init(): void {
     console.log('auth init'); // todo remove
-    this.currentUser = UserAuthService.getUserFromStorage() || userGuest;
+    // this.currentUser = UserAuthService.getUserFromStorage() || userGuest;
 
-    if (this.tokenAuthService.getToken() && this.isAuthorized()) {
-      this.userUpdatedEvent.next(this.currentUser);
-    } else if (!this.tokenAuthService.getToken() && this.isAuthorized()) {
-      localStorage.removeItem(STORAGE_USER_NAME);
-      this.setUser(userGuest);
-    } else if (this.tokenAuthService.getToken() && !this.isAuthorized()) {
+    // if (this.tokenAuthService.getToken() && this.isAuthorized()) {
+    //   this.userUpdatedEvent.next(this.currentUser);
+    // } else if (!this.tokenAuthService.getToken() && this.isAuthorized()) {
+    //   localStorage.removeItem(STORAGE_USER_NAME);
+    //   this.setUser(userGuest);
+    // } else if (this.tokenAuthService.getToken() && !this.isAuthorized()) {
+    //   this.loadUserFromServer();
+    // }
+
+    if (this.tokenAuthService.getToken()) {
       this.loadUserFromServer();
     }
   }
 
-  private saveUserToStorage(user: IUser): void {
+  private saveUserToStorage(user: IUserAuth): void {
     if (!this.isAuthorized()) {
       return;
     }
@@ -84,11 +90,11 @@ export class UserAuthService {
     return !!this.getUser().id.toString();
   }
 
-  public getUser(): IUser {
+  public getUser(): IUserAuth {
     return this.currentUser;
   }
 
-  public setUser(user: IUser): void {
+  public setUser(user: IUserAuth): void {
     console.log('auth setUser'); // todo remove
     this.currentUser = user;
     this.saveUserToStorage(user);
@@ -96,19 +102,21 @@ export class UserAuthService {
   }
 
   private loadUserFromServer(): void {
-    // this.httpClient.get<{ user: IUser }>(GET_CURRENT_USER_API_URL).subscribe((res) => {
-    //     this.setUser(res.user);
-    //   }, err => {
-    //     console.log(err);
-    //   }
-    // );
-    this.setUser({ // todo use real API instead
-      id: '0',
-      isActive: true,
-      permissionForAccessToActiveAdmin: true,
-      permissionForAddEditAndRemoveAnimals: true,
-      permissionForCreateAndCloseAnimalRequests: true
-    });
+    const params = new HttpParams().append('token', this.tokenAuthService.getToken());
+    this.httpClient.get<IUserAuthResponse>(GET_CURRENT_USER_API_URL, {params}).subscribe((res) => {
+        this.setUser(Convertors.convertUserAuthResponseToUserAuth(res));
+        console.log('updated user from server:' + JSON.stringify(this.getUser()));
+      }, err => {
+        console.log(err);
+      }
+    );
+    // this.setUser({ // todo use real API instead
+    //   id: '0',
+    //   isActive: true,
+    //   permissionForAccessToActiveAdmin: true,
+    //   permissionForAddEditAndRemoveAnimals: true,
+    //   permissionForCreateAndCloseAnimalRequests: true
+    // });
 
   }
 
