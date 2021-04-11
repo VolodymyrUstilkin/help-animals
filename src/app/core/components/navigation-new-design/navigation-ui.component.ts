@@ -110,9 +110,7 @@ export class NavigationUiComponent implements OnInit, OnDestroy, AfterViewInit{
         if (user.permissionForAddEditAndRemoveAnimals) {
           this.adminMenuItems.push(new NavMenuItem('Керування обліком тварин', BASE_URL + '/admin/animals/list'));
         }
-        if (user.permissionForAccessToActiveAdmin) {
-          this.adminMenuItems.push(new NavMenuItem('Керування користувачами', BASE_URL + '/admin/users'));
-        }
+        this.adminMenuItems.push(new NavMenuItem('Користувачi', BASE_URL + '/admin/users'));
         this.adminMenuItems.push(new NavMenuItem('Вихiд', BASE_URL + 'login'));
         break;
       case 'mobile':
@@ -122,9 +120,7 @@ export class NavigationUiComponent implements OnInit, OnDestroy, AfterViewInit{
         if (user.permissionForAddEditAndRemoveAnimals) {
           this.publicMenuItems.push(new NavMenuItem('Керування обліком тварин', BASE_URL + '/admin/animals/list'));
         }
-        if (user.permissionForAccessToActiveAdmin) {
-          this.publicMenuItems.push(new NavMenuItem('Керування користувачами', BASE_URL + '/admin/users'));
-        }
+        this.publicMenuItems.push(new NavMenuItem('Користувачi', BASE_URL + '/admin/users'));
         this.publicMenuItems.push(new NavMenuItem('Вихiд', BASE_URL + 'login'));
         break;
       default:
