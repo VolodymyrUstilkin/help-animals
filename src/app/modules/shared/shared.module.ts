@@ -20,7 +20,4 @@ import {UserAuthService} from './services/user-auth-service/user-auth.service';
   providers: [...sharedServices],
 })
 export class SharedModule {
-  constructor(private userAuthService: UserAuthService) {
-    userAuthService.init();
-  }
 }
