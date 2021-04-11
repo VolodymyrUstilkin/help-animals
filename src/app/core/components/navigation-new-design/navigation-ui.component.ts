@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { UserAuthService } from 'src/app/modules/shared/services/user-auth-service/user-auth.service';
-import {environment} from '../../../../environments';
 
 const BASE_URL = '/';
 
