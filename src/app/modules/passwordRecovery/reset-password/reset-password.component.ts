@@ -19,12 +19,12 @@ export class ResetPasswordComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
   private subscription: Subscription = new Subscription();
-  private statePassword?: string = '';
-  private stateRepeatPassword?: string = '';
+  private statePassword = '';
+  private stateRepeatPassword = '';
   public message = '';
 
   constructor(private httpClient: HttpClient,
-    private formBuilder: FormBuilder,
+              private formBuilder: FormBuilder,
     ) {}
 
   ngOnInit(): void {
@@ -49,28 +49,28 @@ export class ResetPasswordComponent implements OnInit, AfterViewInit, OnDestroy 
       if (this.validField() && this.exactDataField()) {
         console.log('valid');
         this.resetForm();
-      } else if(this.validField() && !this.exactDataField()) {
-          this.message = 'Паролi не спiвпадають спробуйте ще раз!'
+      } else if (this.validField() && !this.exactDataField()) {
+          this.message = 'Паролi не спiвпадають спробуйте ще раз!';
           console.log(this.message);
       }
-    }))
+    }));
 
   }
 
   private validField(): boolean {
-    return this.resetPasswordForm.controls.password.valid && this.resetPasswordForm.controls.repeatPassword.valid
+    return this.resetPasswordForm.controls.password.valid && this.resetPasswordForm.controls.repeatPassword.valid;
   }
 
   private exactDataField(): boolean {
-    return this.resetPasswordForm.controls.password.value === this.resetPasswordForm.controls.repeatPassword.value
+    return this.resetPasswordForm.controls.password.value === this.resetPasswordForm.controls.repeatPassword.value;
   }
 
-  public submit(event: Event):void {
+  public submit(event: Event): void {
     console.log(event);
 
   }
 
-  private resetForm() :void {
+  private resetForm(): void {
     this.resetPasswordForm.reset();
   }
 

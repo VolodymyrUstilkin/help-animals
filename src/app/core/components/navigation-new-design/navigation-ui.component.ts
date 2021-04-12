@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { animate, keyframes, query, state, style, transition, trigger } from '@angular/animations';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { UserAuthService } from 'src/app/core/services/user-auth-service/user-auth.service';
 
@@ -17,10 +18,71 @@ class NavMenuItem implements INavMenuItem {
 @Component({
   selector: 'app-navigation-ui',
   templateUrl: './navigation-ui.component.html',
-  styleUrls: ['./navigation-ui.component.css']
+  styleUrls: ['./navigation-ui.component.css'],
+  animations: [
+    trigger('slideRight', [
+      transition('initial => expanded', animate('0.5s ease-in-out', keyframes([
+        style({
+          transform: 'translateX(150px)',
+          opacity: '0',
+          offset: 0
+        }),
+        style({
+          transform: 'translateX(-50px)',
+          opacity: '0.8',
+          offset: 0.8
+        }),
+        style({
+          transform: 'translateX(0)',
+          opacity: '1',
+          offset: 1
+        })
+      ])))
+    ]),
+    trigger('addingItems', [
+      state(':enter', style({
+          transform: 'scale(0)'
+      })),
+      state(':leave', style({
+          transform: 'scale(1)'
+      })),
+      transition('* <=> *', animate('.5s ease-in-out', keyframes([
+        style({
+          transform: 'scale(0)',
+          opacity: '0',
+          offset: 0
+        }),
+        style({
+          transform: 'scale(0.4)',
+          opacity: '0.4',
+          offset: 0.4
+        }),
+        style({
+          transform: 'scale(0.6)',
+          opacity: '0.6',
+          offset: 0.6
+        }),
+        style({
+          transform: 'scale(0.8)',
+          opacity: '0.8',
+          offset: 0.8
+        }),
+        style({
+          transform: 'scale(1)',
+          opacity: '1',
+          offset: 1
+        })
+      ])))
+    ])
+  ]
 })
 
-export class NavigationUiComponent implements OnInit, AfterViewInit, OnDestroy{
+
+
+export class NavigationUiComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy{
+
+  openCancelFavorite = false;
+  state = 'initial';
 
   active = false;
   @ViewChildren('menu') menu!: QueryList<ElementRef>;
@@ -31,7 +93,7 @@ export class NavigationUiComponent implements OnInit, AfterViewInit, OnDestroy{
 
   subscription: Subscription;
 
-  constructor(private userAuthService: UserAuthService) {
+  constructor(private userAuthService: UserAuthService, private cdRef: ChangeDetectorRef) {
     this.subscription = userAuthService.userUpdatedEvent.subscribe(() => {
       this.createMenu();
     });
@@ -73,6 +135,11 @@ export class NavigationUiComponent implements OnInit, AfterViewInit, OnDestroy{
     }));
   }
 
+  ngAfterViewChecked(): void {
+    this.state = 'expanded';
+    this.cdRef.detectChanges();
+  }
+
   private createMenu(): void {
     this.publicMenuItems = [];
     this.adminMenuItems = [];
@@ -98,9 +165,9 @@ export class NavigationUiComponent implements OnInit, AfterViewInit, OnDestroy{
   private additionalMenu(flag: string): void {
     const user = this.userAuthService.getUser();
 
-    if (!user.isActive){
-      return;
-    }
+    // if (!user.isActive){
+    //   return;
+    // }
 
     switch (flag) {
       case 'desktop':

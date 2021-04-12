@@ -3,7 +3,7 @@
   width: 100%;
   min-height: calc(100vh - 105px);
   background: url('../../../../assets/images/friends.svg');
-  background-size: 500px;
+  background-size: 550px;
   background-repeat: no-repeat;
   background-position: 100% 55%;
   display: flex;
@@ -12,21 +12,21 @@
 }
 
 .wrapper .main {
-    max-width: 600px;
+  max-width: calc(320px + (600 - 320) * ((100vw - 320px) / (1200 - 320)));;
 }
 
 .wrapper .main .container .main__header{
   color: #2F2E41;
-  font-size: 3.5rem;
+  font-size: calc(30px + (40 - 30) * ((100vw - 320px) / (1200 - 320)));
   font-weight: 600;
   text-align: center;
 }
 
 .wrapper .main .container .main__text{
-  font-size: 1.2rem;
+  font-size: calc(18px + (30 - 18) * ((100vw - 320px) / (1200 - 320)));
   color: #2F2E41;
-  font-weight: 300;
-  margin: 20px 0
+  font-weight: 500;
+  margin: calc(10px + (20 - 10) * ((100vw - 320px) / (1200 - 320))) 0;
 }
 
 .wrapper .main .container .phone{
@@ -39,10 +39,10 @@
 
 .wrapper .main .container .phone .phone__items-link{
   color: #2F2E41;
-  font-size: 1.5rem;
+  font-size: calc(14px + (21 - 14) * ((100vw - 320px) / (1200 - 320)));
 }
 
-.wrapper .main .container  .main__link{
+.wrapper .main .container .main__link{
   display: inline-block;
   padding: 10px 30px;
   font-weight: 500;
@@ -51,7 +51,7 @@
 
 .social{
   position: absolute;
-  bottom: 30px;
+  bottom: calc(10px + (30 - 10) * ((100vw - 320px) / (1200 - 320)));
   display: flex;
 }
 
@@ -67,9 +67,9 @@
   margin-right: 20px;
 }
 
-@media (max-width:1200px) {
+@media (max-width:1200px){
   .wrapper{
-  background-size: 350px;
+    background-size: calc(10px + (550 - 10) * ((100vw - 320px) / (1200 - 320)));
   }
 }
 
@@ -90,26 +90,8 @@
   flex-direction: column;
 }
 
-.wrapper .main .container .main__header{
-  font-size: 2.5rem;
-}
-
-.wrapper .main .container .main__text{
-  font-size: 1rem;
-  margin: 10px 0
-}
-
 .wrapper .main .container .phone{
   flex-direction: column;
   padding: 0 0 10px 0;
-}
-
-.wrapper .main .container .phone .phone__items-link{
-  color: #2F2E41;
-  font-size: 1.2rem;
-}
-
-.social{
-  bottom: 10px;
 }
 }

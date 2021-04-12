@@ -2,13 +2,13 @@
   '_auth': isAuth(),
   '_active': active}">
   <ul class="menu__list">
-    <li *ngFor="let item of publicMenuItems">
-      <a class="menu__link"  [routerLink]="item.url" #links>
+    <li *ngFor="let item of publicMenuItems" [@slideRight]="state">
+      <a class="menu__link"  [routerLink]="item.url" #links routerLinkActive="active">
         <img class="menu__link-image" src="/assets/images/pawprintCat.svg" alt="">
         <p class="menu__link-text">{{item.text}}</p>
       </a>
     </li>
-    <li *ngIf="isAuth() && !isMobile()">
+    <li *ngIf="isAuth() && !isMobile()" [@addingItems]>
       <a class="menu__link" #menu>
         <img class="menu__link-image" src="/assets/images/pawprintCat.svg" alt="">
         <p class="menu__link-text">Меню</p>

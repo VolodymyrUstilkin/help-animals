@@ -1,8 +1,8 @@
 <header class="header">
   <div class="header__container">
-    <a routerLink="home" class="header__logo"></a>
+    <a routerLink="home" class="header__logo" [@slideLeft]="state">Logo</a>
     <div class="header__menu">
-      <div class="menu__icon" #burger>
+      <div class="menu__icon" #burger [@slideRight]="state">
         <span></span>
       </div>
       <ng-content></ng-content>

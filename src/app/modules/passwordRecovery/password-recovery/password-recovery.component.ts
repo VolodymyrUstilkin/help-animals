@@ -13,11 +13,11 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit, OnDestr
   @ViewChild('form') form!: HTMLFormElement;
 
 
-  public responseFromServer?: boolean = false;
-  public successMessage?: boolean = false;
+  public responseFromServer = false;
+  public successMessage = false;
   private subscription: Subscription = new Subscription();
   public emailControl!: FormControl;
-  private stateEmail?: string = ''
+  private stateEmail = '';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -40,10 +40,10 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit, OnDestr
         console.log('valid');
         this.resetForm();
       }
-    }))
+    }));
   }
 
-  private resetForm() :void {
+  private resetForm(): void {
     this.emailControl.reset();
   }
 
