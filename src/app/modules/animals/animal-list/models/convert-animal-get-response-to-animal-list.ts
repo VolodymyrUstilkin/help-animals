@@ -11,7 +11,7 @@ export const convertAnimalGetResponseToAnimalList = (response: IAnimalInfoGetRes
         sex: resp.sex,
         color: resp.color,
         features: resp.features,
-        imgUrl: resp.image ? environment.serverHost + resp.image.file.url : '/assets/images/no-photo.jpg'
+        imgUrl: resp.image ? environment.apiServerHost + resp.image.file.url : '/assets/images/no-photo.jpg'
       };
     }
   );

@@ -6,7 +6,7 @@ import {environment} from '../../../../environments';
 import {TokenAuthService} from '../../../core/services/token-auth-service/token-auth.service';
 import {Router} from '@angular/router';
 
-const AUTHENTICATION_URL = environment.serverHost + environment.apiUrl + '/login';
+const AUTHENTICATION_URL = environment.apiUrl + '/login';
 
 @Component({
   selector: 'app-login',

@@ -54,7 +54,7 @@ export class AnimalDetailsConverters {
       animalHasFamily: response.animal_has_family,
       showInGallery: response.show_in_gallery,
 
-      imageUrl: response.image ? environment.serverHost + response.image.file.url : '',
+      imageUrl: response.image ? environment.apiServerHost + response.image.file.url : '',
       createdAt: convertTimestampToLocalDateTime(response.created_at),
       updatedAt: convertTimestampToLocalDateTime(response.updated_at),
       editedBy: response.edited_by,

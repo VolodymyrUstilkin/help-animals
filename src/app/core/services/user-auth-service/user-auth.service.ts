@@ -8,7 +8,7 @@ import {Convertors} from './models/convertors';
 import {IUserAuthPermissions} from './models/i-user-auth-permissions';
 import {IUserAuthResponse} from './models/i-user-auth-response';
 
-const GET_CURRENT_USER_API_URL = environment.serverHost + environment.apiUrl + '/login';
+const GET_CURRENT_USER_API_URL = environment.apiUrl + '/login';
 
 class UserAuthPermissionsDefault implements IUserAuthPermissions {
   isActive = false;

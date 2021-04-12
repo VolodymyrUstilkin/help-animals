@@ -12,8 +12,8 @@ import {IAdminClosedAnimalFindRequest} from './models/i-admin-closed-animal-find
 import {IAdminClosedAnimalFindRequestGetResponse} from './models/i-admin-closed-animal-find-request-get-response';
 
 // const API_ANIMALS_FIND_REQUESTS_URL = environment.fakeApiUrl + '/animals-find-requests/';
-const API_ANIMALS_REQUESTS_OPENED_URL = environment.serverHost + environment.apiUrl + '/opened-requests';
-const API_ANIMALS_REQUESTS_CLOSED_URL = environment.serverHost + environment.apiUrl + '/closed-requests';
+const API_ANIMALS_REQUESTS_OPENED_URL = environment.apiUrl + '/opened-requests';
+const API_ANIMALS_REQUESTS_CLOSED_URL = environment.apiUrl + '/closed-requests';
 const ADMIN_ANIMALS_FIND_REQUESTS_URL = '/admin/animals/find-requests';
 
 @Component({
@@ -93,7 +93,7 @@ export class AdminAnimalsFindRequestsComponent implements OnDestroy {
 
     // const headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
     // this.httpClient.patch(url, JSON.stringify({id}), {headers}).subscribe((resp) => {
-    this.httpClient.patch(url, null).subscribe((resp) => {
+    this.httpClient.patch(url, null).subscribe(() => {
       this.getAnimalsFindRequests();
     }, (err) => this.submitErrorHandler(err));
   }

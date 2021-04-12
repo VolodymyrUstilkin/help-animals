@@ -9,7 +9,7 @@ import {IAnimalInfoGetResponse} from './models/ianimal-infoget-response';
 import {convertAnimalGetResponseToAnimalList} from './models/convert-animal-get-response-to-animal-list';
 
 export const ANIMALS_URL = '/animals';
-const API_GET_ANIMALS_URL = environment.serverHost + environment.apiUrl + ANIMALS_URL;
+const API_GET_ANIMALS_URL = environment.apiUrl + ANIMALS_URL;
 
 @Component({
   selector: 'app-animal-list',
