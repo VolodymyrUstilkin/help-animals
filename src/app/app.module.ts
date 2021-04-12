@@ -4,9 +4,10 @@ import {AppRouting} from './app-routing';
 import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {PageNotFoundComponent} from './core/components/page-not-found/page-not-found.component';
-import {AuthInterceptor} from './core/interceptors/auth.interceptor';
-import {NavigationUiComponent} from './core/components/navigation-new-design/navigation-ui.component';
-import {HeaderUiComponent} from './core/components/header-new-design/header-ui.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { NavigationUiComponent } from './core/components/navigation-new-design/navigation-ui.component';
+import { HeaderUiComponent } from './core/components/header-new-design/header-ui.component';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {HeaderUiComponent} from './core/components/header-new-design/header-ui.c
     BrowserModule,
     HttpClientModule,
     AppRouting,
+    BrowserAnimationsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, // Injection Token

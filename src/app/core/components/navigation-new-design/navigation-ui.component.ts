@@ -20,7 +20,7 @@ class NavMenuItem implements INavMenuItem {
   styleUrls: ['./navigation-ui.component.css']
 })
 
-export class NavigationUiComponent implements OnInit, OnDestroy, AfterViewInit{
+export class NavigationUiComponent implements OnInit, AfterViewInit, OnDestroy{
 
   active = false;
   @ViewChildren('menu') menu!: QueryList<ElementRef>;
@@ -90,7 +90,7 @@ export class NavigationUiComponent implements OnInit, OnDestroy, AfterViewInit{
     this.publicMenuItems.push(new NavMenuItem('Переглянути тваринок', BASE_URL + 'animals'));
     this.publicMenuItems.push(new NavMenuItem('Про нас', BASE_URL + 'about'));
     this.publicMenuItems.push(new NavMenuItem('Допомогти котикам', BASE_URL + 'donate'));
-    if (!this.userAuthService.isAuthorized()) {
+    if (!this.isAuth()) {
       this.publicMenuItems.push(new NavMenuItem('Вхід', BASE_URL + 'login'));
     }
   }
@@ -120,8 +120,10 @@ export class NavigationUiComponent implements OnInit, OnDestroy, AfterViewInit{
         if (user.permissionForAddEditAndRemoveAnimals) {
           this.publicMenuItems.push(new NavMenuItem('Керування обліком тварин', BASE_URL + '/admin/animals/list'));
         }
-        this.publicMenuItems.push(new NavMenuItem('Користувачi', BASE_URL + '/admin/users'));
-        this.publicMenuItems.push(new NavMenuItem('Вихiд', BASE_URL + 'login'));
+        if (this.isAuth()) {
+          this.publicMenuItems.push(new NavMenuItem('Користувачi', BASE_URL + '/admin/users'));
+          this.publicMenuItems.push(new NavMenuItem('Вихiд', BASE_URL + 'login'));
+        }
         break;
       default:
         break;

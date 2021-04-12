@@ -10,19 +10,23 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
+    data: {animation: 'home'}
   },
   {
     path: 'about',
-    loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule)
+    loadChildren: () => import('./modules/about/about.module').then(m => m.AboutModule),
+    data: {animation: 'about'}
   },
   {
     path: 'donate',
-    loadChildren: () => import('./modules/donate/donate.module').then(m => m.DonateModule)
+    loadChildren: () => import('./modules/donate/donate.module').then(m => m.DonateModule),
+    data: {animation: 'donate'}
   },
   {
     path: 'animals',
-    loadChildren: () => import('./modules/animals/animals.module').then(m => m.AnimalsModule)
+    loadChildren: () => import('./modules/animals/animals.module').then(m => m.AnimalsModule),
+    data: {animation: 'animals'}
   },
   {
     path: 'admin',
