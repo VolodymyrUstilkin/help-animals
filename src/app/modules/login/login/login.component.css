@@ -41,3 +41,8 @@
 .submit-button {
   min-width: 50%;
 }
+
+.active-admin-api-link {
+  padding-top: 5px;
+  justify-self: left;
+}

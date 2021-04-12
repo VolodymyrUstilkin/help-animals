@@ -1,12 +1,24 @@
 <div class="login-root">
   <form [formGroup]="loginForm">
     <label class="label new-line-padding" for="login-input">Login:</label>
-    <input id="login-input" type="text" class="input max-width" name="login" formControlName="login" autocomplete="on">
-    <div class="error-message" *ngIf="loginForm.controls['login'].invalid">Required</div>
+    <input id="login-input"
+           type="text"
+           class="input max-width"
+           name="login"
+           formControlName="login"
+           autocomplete="on"
+           (keypress)="submitKeyPress($event)">
+    <div class="error-message" *ngIf="loginForm.controls.login.invalid">Required</div>
 
     <label class="label new-line-padding" for="password-input">Password:</label>
-    <input id="password-input" type="password" class="input max-width" name="password" formControlName="password" autocomplete="off">
-    <div class="error-message" *ngIf="loginForm.controls['password'].invalid">Required</div>
+    <input id="password-input"
+           type="password"
+           class="input max-width"
+           name="password"
+           formControlName="password"
+           autocomplete="off"
+           (keypress)="submitKeyPress($event)">
+    <div class="error-message" *ngIf="loginForm.controls.password.invalid">Required</div>
 
     <div class="remember-container new-line-padding">
       <div class="remember-container-left">
@@ -22,4 +34,5 @@
       <button type="button" class="button submit-button" (click)="submitLogin()" [disabled]="loginForm.invalid">Увійти</button>
     </div>
   </form>
+  <a class="active-admin-api-link" href="{{activeAdminApiUrl}}">Login for admin</a>
 </div>

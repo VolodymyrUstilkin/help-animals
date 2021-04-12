@@ -14,6 +14,8 @@ const AUTHENTICATION_URL = environment.apiUrl + '/login';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  activeAdminApiUrl = environment.activeAdminApiUrl;
+
   loginForm: FormGroup = this.formBuilder.group({
     login: ['', [Validators.required]],
     password: ['', [Validators.required]],
@@ -42,6 +44,9 @@ export class LoginComponent implements OnInit {
   }
 
   submitLogin(): void {
+    if (this.loginForm.invalid) {
+      return;
+    }
     const headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
     const reqBody: string = JSON.stringify({login: this.loginForm.value.login, password: this.loginForm.value.password});
     this.httpClient.post<{ token: string }>(AUTHENTICATION_URL, reqBody, {headers})
@@ -52,5 +57,11 @@ export class LoginComponent implements OnInit {
         console.log(error);
       });
     this.loginForm.patchValue({password: ''});
+  }
+
+  submitKeyPress(event: KeyboardEvent): void {
+    if (event.key === 'Enter' && this.loginForm.valid) {
+      this.submitLogin();
+    }
   }
 }
