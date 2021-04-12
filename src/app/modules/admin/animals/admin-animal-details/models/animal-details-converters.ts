@@ -28,8 +28,10 @@ export class AnimalDetailsConverters {
       }
 
       const key = camelToSnakeCaseConvertor(k);
-      if (typeof v === 'string' || typeof v === 'object') {
+      if (typeof v === 'string') {
         reqFormData.set(key, v);
+      } else if (typeof v === 'object') {
+        reqFormData.set(key, v, v.name);
       } else {
         reqFormData.set(key, v.toString());
       }
