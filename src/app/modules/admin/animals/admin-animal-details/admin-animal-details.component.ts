@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserAuthService} from '../../../../core/services/user-auth-service/user-auth.service';
-import {FileReaderAsDataUrl} from '../../../shared/models/file-reader-as-data-url';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {IAdminAnimalDetailsPostPatchRequest} from './models/i-admin-animal-details-post-patch-request';
 import {AnimalDetailsConverters} from './models/animal-details-converters';
@@ -10,6 +9,10 @@ import {IAdminAnimalDetailsGetResponse} from './models/i-admin-animal-details-ge
 import {ADMIN_ANIMALS_URL, API_ADMIN_ANIMALS_URL} from '../models/urls';
 import {IAdminAnimalDetailsRequestResponseBaseParams} from './models/i-admin-animal-details-request-response-base-params';
 import {IAdminAnimalDetails} from './models/i-admin-animal-details';
+
+// @ts-ignore
+import imgCompressor from 'browser-image-compression';
+
 
 class AdminAnimalDetails implements IAdminAnimalDetails {
   age = 0;
@@ -69,7 +72,7 @@ export class AdminAnimalDetailsComponent {
               private userAuthService: UserAuthService,
               private formBuilder: FormBuilder) {
     this.getAnimal(activatedRouter.snapshot.params.id);
-    this.form.valueChanges.subscribe(val => this.formWasChanged = true);
+    this.form.valueChanges.subscribe(() => this.formWasChanged = true);
   }
 
   public getAnimal(id?: number | string): void {
@@ -108,13 +111,21 @@ export class AdminAnimalDetailsComponent {
       return;
     }
 
-    const file = elem.files[0];
-    FileReaderAsDataUrl.readAsDataURL(file).subscribe(res => {
-      this.imagePreview = res.fileContent;
-      this.loadedPhotoFile = file;
-    }, error => {
-      alert('Невдалося завантажити файл: ' + error);
-    });
+    const rawFile = elem.files[0];
+
+    const compressOptions = {
+      maxSizeMB: 1,
+      useWebWorker: true
+    };
+
+    try {
+      imgCompressor(rawFile, compressOptions).then(async (file: File) => {
+        this.imagePreview = await imgCompressor.getDataUrlFromFile(file);
+        this.loadedPhotoFile = file;
+      });
+    } catch (err) {
+      alert('Невдалося завантажити файл: ' + err);
+    }
   }
 
   submitEditAnimal(): void {
