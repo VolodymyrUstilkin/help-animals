@@ -7,7 +7,7 @@
     "startJsonServer": "json-server --watch ./api/db.json --port 3001",
     "buildProduction": "ng build --prod",
     "startExpressServer": "node ./server/server.js 8000",
-    "buildProductionBaseHrefRoot": "ng build --prod  --output-path docs --base-href ./",
+    "buildForGithubPages": "ng build --prod  --output-path docs --base-href ./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
