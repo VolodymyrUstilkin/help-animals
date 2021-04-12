@@ -66,13 +66,23 @@ export class AdminAnimalDetailsComponent {
     }
   );
 
+  showCreateAnimalButton = false;
+  showEditAnimalButton = false;
+  showPrintButton = false;
+  showRollbackButton = false;
+
   constructor(private httpClient: HttpClient,
               private activatedRouter: ActivatedRoute,
               private router: Router,
               private userAuthService: UserAuthService,
               private formBuilder: FormBuilder) {
     this.getAnimal(activatedRouter.snapshot.params.id);
-    this.form.valueChanges.subscribe(() => this.formWasChanged = true);
+    this.updateButtons();
+
+    this.form.valueChanges.subscribe(() => {
+      this.formWasChanged = true;
+      this.updateButtons();
+    });
   }
 
   public getAnimal(id?: number | string): void {
@@ -98,6 +108,7 @@ export class AdminAnimalDetailsComponent {
         showInGallery: this.adminAnimalDetails.showInGallery,
       });
       this.formWasChanged = false;
+      this.updateButtons();
     });
   }
 
@@ -122,6 +133,7 @@ export class AdminAnimalDetailsComponent {
       imgCompressor(rawFile, compressOptions).then(async (file: File) => {
         this.imagePreview = await imgCompressor.getDataUrlFromFile(file);
         this.loadedPhotoFile = file;
+        this.formWasChanged = true;
       });
     } catch (err) {
       alert('Невдалося завантажити файл: ' + err);
@@ -170,5 +182,12 @@ export class AdminAnimalDetailsComponent {
 
   printAnimal(): void {
     AnimalDetailsConverters.convertToPdf(this.adminAnimalDetails);
+  }
+
+  updateButtons(): void {
+    this.showCreateAnimalButton = !this.form.value.id && this.animalsChangePermission;
+    this.showEditAnimalButton = this.form.value.id && this.animalsChangePermission;
+    this.showPrintButton = this.showEditAnimalButton && !this.formWasChanged;
+    this.showRollbackButton = !this.showPrintButton && !this.showCreateAnimalButton;
   }
 }

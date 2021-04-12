@@ -130,20 +130,25 @@
   <div class="buttons-container">
     <button class="button admin-details-form-field-submit-button"
             type="button"
-            *ngIf="form.value.id && animalsChangePermission"
+            *ngIf="showEditAnimalButton"
             (click)="submitEditAnimal()"
-            [disabled]="form.invalid">Підтвердити зміни
+            [disabled]="form.invalid || !formWasChanged">Підтвердити зміни
     </button>
     <button class="button admin-details-form-field-submit-button"
             type="button"
-            *ngIf="!form.value.id && animalsChangePermission"
+            *ngIf="showCreateAnimalButton"
             (click)="submitAddAnimal()"
             [disabled]="form.invalid">Додати тварину
     </button>
     <button class="button admin-details-form-field-submit-button"
             type="button"
-            (click)="printAnimal()"
-            [disabled]="formWasChanged">Друкувати
+            *ngIf="showPrintButton"
+            (click)="printAnimal()">Друкувати
+    </button>
+    <button class="button admin-details-form-field-submit-button"
+            type="button"
+            *ngIf="showRollbackButton"
+            (click)="getAnimal(adminAnimalDetails.id)">Скасувати
     </button>
   </div>
 
