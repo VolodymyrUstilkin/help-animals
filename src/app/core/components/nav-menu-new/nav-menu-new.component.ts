@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy} from '@angular/core';
-import {UserAuthService} from '../../../modules/shared/services/user-auth-service/user-auth.service';
+import {UserAuthService} from '../../services/user-auth-service/user-auth.service';
 import {Subscription} from 'rxjs';
 
 const BASE_URL = '/';

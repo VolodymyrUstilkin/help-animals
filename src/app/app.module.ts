@@ -8,7 +8,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { NavigationUiComponent } from './core/components/navigation-new-design/navigation-ui.component';
 import { HeaderUiComponent } from './core/components/header-new-design/header-ui.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {services} from './modules/shared/services';
+import {services} from './core/services';
 
 @NgModule({
   declarations: [

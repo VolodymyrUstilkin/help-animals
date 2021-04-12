@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {IPagination, Pagination} from '../../../shared/components/pagination/pagination.component';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
-import {UserAuthService} from '../../../shared/services/user-auth-service/user-auth.service';
+import {UserAuthService} from '../../../../core/services/user-auth-service/user-auth.service';
 import {IAdminUserListTableElement} from './models/i-admin-user-list-table-element';
 import {ADMIN_USERS_URL, API_ADMIN_USERS_URL} from '../models/urls';
 import {IAdminUserListGetResponseElement} from './models/i-admin-user-list-get-response-element';

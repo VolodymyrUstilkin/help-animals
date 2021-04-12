@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UserAuthService} from '../../shared/services/user-auth-service/user-auth.service';
+import {UserAuthService} from '../../../core/services/user-auth-service/user-auth.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments';
-import {TokenAuthService} from '../../shared/services/token-auth-service/token-auth.service';
+import {TokenAuthService} from '../../../core/services/token-auth-service/token-auth.service';
 import {Router} from '@angular/router';
 
 const AUTHENTICATION_URL = environment.serverHost + environment.apiUrl + '/login';

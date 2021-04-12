@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserAuthService} from '../../../shared/services/user-auth-service/user-auth.service';
+import {UserAuthService} from '../../../../core/services/user-auth-service/user-auth.service';
 import {FileReaderAsDataUrl} from '../../../shared/models/file-reader-as-data-url';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {IAdminAnimalDetailsPostPatchRequest} from './models/i-admin-animal-details-post-patch-request';

@@ -1,4 +1,4 @@
-import {IUserAuthPermissions} from '../../../shared/services/user-auth-service/user-auth.service';
+import {IUserAuthPermissions} from '../../../../core/services/user-auth-service/user-auth.service';
 
 // export interface IAdminUserInfo { // todo remove
 //   id: string;

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Subscription} from 'rxjs';
-import {environment} from '../../../../../environments';
+import {environment} from '../../../../environments';
 import {Router} from '@angular/router';
 import {TokenAuthService} from '../token-auth-service/token-auth.service';
 import {Convertors} from './models/convertors';

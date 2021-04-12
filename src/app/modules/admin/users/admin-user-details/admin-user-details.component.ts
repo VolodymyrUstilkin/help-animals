@@ -1,7 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
-import {UserAuthService} from '../../../shared/services/user-auth-service/user-auth.service';
+import {UserAuthService} from '../../../../core/services/user-auth-service/user-auth.service';
 import {IAdminUserDetailsGetResponse} from './models/i-admin-user-details-get-response';
 import {IAdminUserDetails} from './models/i-admin-user-details';
 import {API_ADMIN_USERS_URL} from '../models/urls';

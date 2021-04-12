@@ -1,4 +1,4 @@
-import {IUserAuthPermissions} from '../../../../shared/services/user-auth-service/models/i-user-auth-permissions';
+import {IUserAuthPermissions} from '../../../../../core/services/user-auth-service/models/i-user-auth-permissions';
 
 export interface IAdminUserDetails extends IUserAuthPermissions {
   id: string;

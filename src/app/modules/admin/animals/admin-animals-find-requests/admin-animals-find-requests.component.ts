@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {IAdminOpenedAnimalFindRequest} from './models/i-admin-opened-animal-find-request';
-import {UserAuthService} from '../../../shared/services/user-auth-service/user-auth.service';
+import {UserAuthService} from '../../../../core/services/user-auth-service/user-auth.service';
 import {IAdminOpenedAnimalFindRequestGetResponse} from './models/i-admin-opened-animal-find-request-get-response';
 import {Convertors} from './models/convertors';
 import {IAdminClosedAnimalFindRequest} from './models/i-admin-closed-animal-find-request';
