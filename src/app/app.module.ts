@@ -8,6 +8,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { NavigationUiComponent } from './core/components/navigation-new-design/navigation-ui.component';
 import { HeaderUiComponent } from './core/components/header-new-design/header-ui.component';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {services} from './modules/shared/services';
 
 @NgModule({
   declarations: [
@@ -22,11 +23,14 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppRouting,
     BrowserAnimationsModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS, // Injection Token
-    useClass: AuthInterceptor, // Interceptor class
-    multi: true, // we added array
-  }],
+  providers: [
+    ...services,
+    {
+      provide: HTTP_INTERCEPTORS, // Injection Token
+      useClass: AuthInterceptor, // Interceptor class
+      multi: true, // we added array
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

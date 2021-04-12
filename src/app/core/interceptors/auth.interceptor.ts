@@ -23,7 +23,6 @@ export class AuthInterceptor implements HttpInterceptor {
             Authorization: `Bearer ${token}`
           }
         }) : request;
-        console.log(authRequest);
         return next.handle(authRequest).pipe(
           catchError( error => {
             if(error instanceof HttpErrorResponse){

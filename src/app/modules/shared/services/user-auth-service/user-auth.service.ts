@@ -62,7 +62,6 @@ export class UserAuthService {
 
     this.httpClient.get<IUserAuthResponse>(GET_CURRENT_USER_API_URL).subscribe((res) => {
         this.setUser(Convertors.convertUserAuthResponseToUserAuth(res));
-        console.log('updated user from server:' + JSON.stringify(this.getUser()));
       }, err => {
         console.log(err);
       }
