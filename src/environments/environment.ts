@@ -1,3 +1,4 @@
+// const apiServerHost = 'http://help-animals.pp.ua:3000';
 const apiServerHost = 'http://localhost:3000';
 
 const apiUrl = apiServerHost + '/api/v1';

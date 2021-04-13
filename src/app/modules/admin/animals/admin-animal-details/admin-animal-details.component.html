@@ -29,7 +29,10 @@
              id="age"
              formControlName="age"
              [readonly]="formReadonlyFieldCheck()"
-             type="number"/>
+             type="number"
+             step="0.1"
+             min="0.1"
+             max="300"/>
     </div>
 
     <div class="admin-details-form-field-container">
@@ -47,14 +50,18 @@
               id="sex"
               formControlName="sex"
       >
-        <option *ngIf="form.value.sex !== AnimalSexTypes.notUse && form.value.sex !== AnimalSexTypes.male && form.value.sex !== AnimalSexTypes.female"
-                value="{{form.value.sex}}"
-                [selected]="form.value.sex !== AnimalSexTypes.notUse && form.value.sex !== AnimalSexTypes.male && form.value.sex !== AnimalSexTypes.female">
+        <option
+          *ngIf="form.value.sex !== AnimalSexTypes.notUse && form.value.sex !== AnimalSexTypes.male && form.value.sex !== AnimalSexTypes.female"
+          value="{{form.value.sex}}"
+          [selected]="form.value.sex !== AnimalSexTypes.notUse && form.value.sex !== AnimalSexTypes.male && form.value.sex !== AnimalSexTypes.female">
           {{form.value.sex}}
         </option>
-        <option value="{{AnimalSexTypes.notUse}}" [selected]="form.value.sex === AnimalSexTypes.notUse">Не вказано</option>
-        <option value="{{AnimalSexTypes.male}}" [selected]="form.value.sex === AnimalSexTypes.male">Котик</option>
-        <option value="{{AnimalSexTypes.female}}" [selected]="form.value.sex === AnimalSexTypes.female">Киця</option>
+        <option value="{{AnimalSexTypes.notUse}}"
+                [selected]="form.value.sex === AnimalSexTypes.notUse">{{AnimalSexTypes.notUse}}</option>
+        <option value="{{AnimalSexTypes.male}}"
+                [selected]="form.value.sex === AnimalSexTypes.male">{{AnimalSexTypes.male}}</option>
+        <option value="{{AnimalSexTypes.female}}"
+                [selected]="form.value.sex === AnimalSexTypes.female">{{AnimalSexTypes.female}}</option>
       </select>
     </div>
 

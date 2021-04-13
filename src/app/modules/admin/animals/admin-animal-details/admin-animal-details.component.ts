@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserAuthService} from '../../../../core/services/user-auth-service/user-auth.service';
@@ -12,6 +12,7 @@ import {IAdminAnimalDetails} from './models/i-admin-animal-details';
 
 // @ts-ignore
 import imgCompressor from 'browser-image-compression';
+import {Subscription} from 'rxjs';
 
 class AdminAnimalDetails implements IAdminAnimalDetails {
   age = 0;
@@ -39,13 +40,13 @@ class AdminAnimalDetails implements IAdminAnimalDetails {
   templateUrl: './admin-animal-details.component.html',
   styleUrls: ['./admin-animal-details.component.css']
 })
-export class AdminAnimalDetailsComponent {
-  animalsChangePermission = this.userAuthService.getUser().permissionForAddEditAndRemoveAnimals; // todo rework to subscription if need
+export class AdminAnimalDetailsComponent implements OnDestroy {
+  animalsChangePermission = false;
 
   AnimalSexTypes = {
-    male: 'male',
-    female: 'female',
-    notUse: 'null'
+    male: 'Котик',
+    female: 'Киця',
+    notUse: 'Не вказано'
   };
 
   adminAnimalDetails: IAdminAnimalDetails = new AdminAnimalDetails();
@@ -55,19 +56,19 @@ export class AdminAnimalDetailsComponent {
   imagePreview = '';
 
   form: FormGroup = this.formBuilder.group({ // todo add validators
-    id: new FormControl(''),
-    name: new FormControl(''),
-    age: new FormControl(1),
-    breed: new FormControl(''),
-    sex: new FormControl(this.AnimalSexTypes.notUse),
-    color: new FormControl(''),
-    features: new FormControl(''),
-    responsiblePerson: new FormControl(''),
-    complexVaccination: new FormControl(false),
-    rabiesVaccination: new FormControl(false),
-    sterilization: new FormControl(false),
-    animalHasFamily: new FormControl(false),
-    showInGallery: new FormControl(false),
+      id: new FormControl(''),
+      name: new FormControl(''),
+      age: new FormControl(1),
+      breed: new FormControl(''),
+      sex: new FormControl(this.AnimalSexTypes.notUse),
+      color: new FormControl(''),
+      features: new FormControl(''),
+      responsiblePerson: new FormControl(''),
+      complexVaccination: new FormControl(false),
+      rabiesVaccination: new FormControl(false),
+      sterilization: new FormControl(false),
+      animalHasFamily: new FormControl(false),
+      showInGallery: new FormControl(false),
     }
   );
 
@@ -75,6 +76,8 @@ export class AdminAnimalDetailsComponent {
   showEditAnimalButton = false;
   showPrintButton = false;
   showRollbackButton = false;
+
+  userChangeSubscription: Subscription;
 
   constructor(private httpClient: HttpClient,
               private activatedRouter: ActivatedRoute,
@@ -84,10 +87,17 @@ export class AdminAnimalDetailsComponent {
     this.getAnimal(activatedRouter.snapshot.params.id);
     this.updateButtons();
 
+    this.userChangeSubscription = userAuthService.userUpdatedEvent
+      .subscribe((user) => this.animalsChangePermission = user.permissionForAddEditAndRemoveAnimals);
+
     this.form.valueChanges.subscribe(() => {
       this.formWasChanged = true;
       this.updateButtons();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.userChangeSubscription.unsubscribe();
   }
 
   public getAnimal(id?: number | string): void {

@@ -55,7 +55,6 @@ export class UserAuthService {
   }
 
   private loadUserFromServer(): void {
-    console.log('loading user from server');
     if (!this.tokenAuthService.getToken()) {
       return;
     }
