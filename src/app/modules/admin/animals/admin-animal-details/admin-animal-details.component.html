@@ -43,11 +43,19 @@
 
     <div class="admin-details-form-field-container">
       <label class="label" for="sex">Стать:</label>
-      <input class="input"
-             id="sex"
-             formControlName="sex"
-             [readonly]="formReadonlyFieldCheck()"
-             type="text"/>
+      <select class="input"
+              id="sex"
+              formControlName="sex"
+      >
+        <option *ngIf="form.value.sex !== AnimalSexTypes.notUse && form.value.sex !== AnimalSexTypes.male && form.value.sex !== AnimalSexTypes.female"
+                value="{{form.value.sex}}"
+                [selected]="form.value.sex !== AnimalSexTypes.notUse && form.value.sex !== AnimalSexTypes.male && form.value.sex !== AnimalSexTypes.female">
+          {{form.value.sex}}
+        </option>
+        <option value="{{AnimalSexTypes.notUse}}" [selected]="form.value.sex === AnimalSexTypes.notUse">Не вказано</option>
+        <option value="{{AnimalSexTypes.male}}" [selected]="form.value.sex === AnimalSexTypes.male">Котик</option>
+        <option value="{{AnimalSexTypes.female}}" [selected]="form.value.sex === AnimalSexTypes.female">Киця</option>
+      </select>
     </div>
 
     <div class="admin-details-form-field-container">
@@ -95,36 +103,31 @@
       <input class="input"
              id="complexVaccination"
              formControlName="complexVaccination"
-             type="checkbox"
-             [readonly]="formReadonlyFieldCheck()"/>
+             type="checkbox"/>
 
       <label class="label" for="rabiesVaccination">Вакцинація від сказу:</label>
       <input class="input"
              id="rabiesVaccination"
              formControlName="rabiesVaccination"
-             type="checkbox"
-             [readonly]="formReadonlyFieldCheck()"/>
+             type="checkbox"/>
 
       <label class="label" for="sterilization">Тварина стерилізована:</label>
       <input class="input"
              id="sterilization"
              formControlName="sterilization"
-             type="checkbox"
-             [readonly]="formReadonlyFieldCheck()"/>
+             type="checkbox"/>
 
       <label class="label" for="animalHasFamily">Тварина влаштована:</label>
       <input class="input"
              id="animalHasFamily"
              formControlName="animalHasFamily"
-             type="checkbox"
-             [readonly]="formReadonlyFieldCheck()"/>
+             type="checkbox"/>
 
       <label class="label" for="showInGallery">Відображати в галереї:</label>
       <input class="input"
              id="showInGallery"
              formControlName="showInGallery"
-             type="checkbox"
-             [readonly]="formReadonlyFieldCheck()"/>
+             type="checkbox"/>
     </section>
   </form>
   <div class="buttons-container">

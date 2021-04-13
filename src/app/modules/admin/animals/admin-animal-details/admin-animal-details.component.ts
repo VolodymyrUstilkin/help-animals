@@ -13,7 +13,6 @@ import {IAdminAnimalDetails} from './models/i-admin-animal-details';
 // @ts-ignore
 import imgCompressor from 'browser-image-compression';
 
-
 class AdminAnimalDetails implements IAdminAnimalDetails {
   age = 0;
   animalHasFamily = false;
@@ -43,6 +42,12 @@ class AdminAnimalDetails implements IAdminAnimalDetails {
 export class AdminAnimalDetailsComponent {
   animalsChangePermission = this.userAuthService.getUser().permissionForAddEditAndRemoveAnimals; // todo rework to subscription if need
 
+  AnimalSexTypes = {
+    male: 'male',
+    female: 'female',
+    notUse: 'null'
+  };
+
   adminAnimalDetails: IAdminAnimalDetails = new AdminAnimalDetails();
   formWasChanged = false;
 
@@ -50,19 +55,19 @@ export class AdminAnimalDetailsComponent {
   imagePreview = '';
 
   form: FormGroup = this.formBuilder.group({ // todo add validators
-      id: new FormControl(''),
-      name: new FormControl(''),
-      age: new FormControl(0),
-      breed: new FormControl(''),
-      sex: new FormControl(''),
-      color: new FormControl(''),
-      features: new FormControl(''),
-      responsiblePerson: new FormControl(''),
-      complexVaccination: new FormControl(false),
-      rabiesVaccination: new FormControl(false),
-      sterilization: new FormControl(false),
-      animalHasFamily: new FormControl(false),
-      showInGallery: new FormControl(false),
+    id: new FormControl(''),
+    name: new FormControl(''),
+    age: new FormControl(1),
+    breed: new FormControl(''),
+    sex: new FormControl(this.AnimalSexTypes.notUse),
+    color: new FormControl(''),
+    features: new FormControl(''),
+    responsiblePerson: new FormControl(''),
+    complexVaccination: new FormControl(false),
+    rabiesVaccination: new FormControl(false),
+    sterilization: new FormControl(false),
+    animalHasFamily: new FormControl(false),
+    showInGallery: new FormControl(false),
     }
   );
 
