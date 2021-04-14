@@ -1,6 +1,10 @@
 .animal-card-container {
   padding: 5px;
   border: 1px solid var(--default-component-background-color);
+  display: grid;
+  grid-template-rows: 1fr 1em 1em 1em 1em 3em;
+  height: 100%;
+
 }
 
 .animal-card-image {
