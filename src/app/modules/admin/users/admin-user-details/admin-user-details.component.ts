@@ -56,9 +56,9 @@ export class AdminUserDetailsComponent implements AfterViewInit {
           email: res.email,
 
           isActive: res.is_active,
-          permissionForAccessToActiveAdmin: res.permission_for_access_to_active_admin,
-          permissionForAddEditAndRemoveAnimals: res.permission_for_add_edit_and_remove_animals,
-          permissionForCreateAndCloseAnimalRequests: res.permission_for_create_and_close_animal_requests,
+          permissionForAccessToActiveAdmin: res.activeadmin,
+          permissionForAddEditAndRemoveAnimals: res.animals_crud,
+          permissionForCreateAndCloseAnimalRequests: res.requests_crud,
 
           createdAt: convertTimestampToLocalDateTime(res.created_at),
           updatedAt: convertTimestampToLocalDateTime(res.updated_at),
