@@ -87,7 +87,7 @@
            readonly="readonly"/>
   </div>
 
-  <div class="admin-details-form-field-container">
+  <div class="admin-details-form-field-container" *ngIf="userDetails.editedBy">
     <label class="label" for="editedBy">Зміни внесені користувачем: </label>
     <input class="input admin-details-form-field-input"
            id="editedBy"
