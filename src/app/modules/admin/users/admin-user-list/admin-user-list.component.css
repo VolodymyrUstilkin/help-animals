@@ -7,3 +7,14 @@
   text-align: center;
 }
 
+.rotate--ninety-deg{
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 5px 0.4rem 5px 0;
+}
+
+.width--fit-content {
+  width: auto;
+  margin: 0;
+  padding: 0;
+}

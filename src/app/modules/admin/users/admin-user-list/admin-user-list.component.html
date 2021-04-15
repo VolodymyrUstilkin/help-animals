@@ -4,14 +4,17 @@
   </div>
 
   <table class="table">
-    <tr>
+    <tr class="table-header">
       <th>Код</th>
       <th>Ім'я та прізвище</th>
-      <th>email</th>
-      <th>тел1</th>
-      <th>тел2</th>
-      <th>діючий</th>
-      <th>дата зміни</th>
+      <th>Email</th>
+      <th>Тел1</th>
+      <th>Тел2</th>
+      <th><p class="rotate--ninety-deg">Діючий</p></th>
+      <th><p class="rotate--ninety-deg">Заявки</p></th>
+      <th><p class="rotate--ninety-deg">Тварини</p></th>
+      <th><p class="rotate--ninety-deg">Корист.</p></th>
+      <th>Дата зміни</th>
       <th></th>
     </tr>
 
@@ -22,7 +25,13 @@
       <td class="text-align--center">{{user.phone1}}</td>
       <td class="text-align--center">{{user.phone2}}</td>
       <td class="text-align--center">{{user.isActive ? '&#10004;' : '&#10008;'}}</td>
-      <td>{{user.updatedAt}}</td>
+      <td
+        class="text-align--center">{{user.permissionForCreateAndCloseAnimalRequests ? '&#10004;' : '&#10008;'}}</td>
+      <td
+        class="text-align--center">{{user.permissionForAddEditAndRemoveAnimals ? '&#10004;' : '&#10008;'}}</td>
+      <td
+        class="text-align--center">{{user.permissionForAccessToActiveAdmin ? '&#10004;' : '&#10008;'}}</td>
+      <td class="text-align--center">{{user.updatedAt}}</td>
       <td class="text-align--center">
         <a class="admin-animal-list-redirect-edit-animal" routerLink="{{getRedirectToUserDetailsLink(user.id)}}">🔍</a>
       </td>
