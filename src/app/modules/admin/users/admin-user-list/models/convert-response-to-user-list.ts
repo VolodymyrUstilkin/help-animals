@@ -13,9 +13,9 @@ export const convertResponseToUserList = (response: IAdminUserListGetResponseEle
         email: resp.email,
 
         isActive: resp.is_active,
-        permissionForAccessToActiveAdmin: resp.permission_for_access_to_active_admin,
-        permissionForAddEditAndRemoveAnimals: resp.permission_for_add_edit_and_remove_animals,
-        permissionForCreateAndCloseAnimalRequests: resp.permission_for_create_and_close_animal_requests,
+        permissionForAccessToActiveAdmin: resp.activeadmin,
+        permissionForAddEditAndRemoveAnimals: resp.animals_crud,
+        permissionForCreateAndCloseAnimalRequests: resp.requests_crud,
 
         createdAt: convertTimestampToLocalDateTime(resp.created_at),
         updatedAt: convertTimestampToLocalDateTime(resp.updated_at),
