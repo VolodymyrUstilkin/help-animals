@@ -9,10 +9,10 @@ import {IAdminAnimalDetailsGetResponse} from './models/i-admin-animal-details-ge
 import {ADMIN_ANIMALS_URL, API_ADMIN_ANIMALS_URL} from '../models/urls';
 import {IAdminAnimalDetailsRequestResponseBaseParams} from './models/i-admin-animal-details-request-response-base-params';
 import {IAdminAnimalDetails} from './models/i-admin-animal-details';
-
+import {Subscription} from 'rxjs';
+import {getUrlForAdminUserDetails} from '../../users/models/urls';
 // @ts-ignore
 import imgCompressor from 'browser-image-compression';
-import {Subscription} from 'rxjs';
 
 class AdminAnimalDetails implements IAdminAnimalDetails {
   age = 0;
@@ -204,5 +204,9 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
     this.showEditAnimalButton = this.form.value.id && this.animalsChangePermission;
     this.showPrintButton = this.showEditAnimalButton && !this.formWasChanged;
     this.showRollbackButton = !this.showPrintButton && !this.showCreateAnimalButton;
+  }
+
+  public getRedirectToUserDetailsLink(userId: number | string): string {
+    return getUrlForAdminUserDetails(userId);
   }
 }

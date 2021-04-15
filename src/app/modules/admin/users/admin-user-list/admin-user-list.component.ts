@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 import {UserAuthService} from '../../../../core/services/user-auth-service/user-auth.service';
 import {IAdminUserListTableElement} from './models/i-admin-user-list-table-element';
-import {ADMIN_USERS_URL, API_ADMIN_USERS_URL} from '../models/urls';
+import {ADMIN_USERS_URL, API_ADMIN_USERS_URL, getUrlForAdminUserDetails} from '../models/urls';
 import {IAdminUserListGetResponseElement} from './models/i-admin-user-list-get-response-element';
 import {convertResponseToUserList} from './models/convert-response-to-user-list';
 
@@ -50,6 +50,6 @@ export class AdminUserListComponent implements OnDestroy {
   }
 
   public getRedirectToUserDetailsLink(id: number | string): string {
-    return `${ADMIN_USERS_URL}/${id}`;
+    return getUrlForAdminUserDetails(id);
   }
 }

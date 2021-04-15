@@ -24,7 +24,7 @@
       <td class="text-align--center">{{user.isActive ? '&#10004;' : '&#10008;'}}</td>
       <td>{{user.updatedAt}}</td>
       <td class="text-align--center">
-        <a class="admin-animal-list-redirect-edit-animal" routerLink="{{getRedirectToUserDetailsLink(user.id + '/details')}}">🔍</a>
+        <a class="admin-animal-list-redirect-edit-animal" routerLink="{{getRedirectToUserDetailsLink(user.id)}}">🔍</a>
       </td>
     </tr>
   </table>

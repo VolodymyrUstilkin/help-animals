@@ -174,10 +174,9 @@
            readonly="readonly"/>
   </div>
 
-  <div class="admin-details-form-field-container" *ngIf="adminAnimalDetails.updatedAt">
+  <div class="admin-details-form-field-container">
     <label class="label" for="editedBy">Останні зміни внесені користувачем:</label>
-    <input class="input" id="editedBy" value="{{adminAnimalDetails.editedBy}}" readonly="readonly"/>
+    <a [routerLink]="getRedirectToUserDetailsLink(adminAnimalDetails.editedBy)" class="input"
+       id="editedBy">{{adminAnimalDetails.editedBy}} (Click)</a>
   </div>
 </div>
-
-
