@@ -197,7 +197,7 @@ export class NavigationUiComponent implements OnInit, AfterViewInit, AfterViewCh
     }
   }
 
-  private hideMenu(): void {
+  hideMenu(): void {
     if (!this.isMobile()) {
       this.menu.forEach((element) => {
         const menu = element.nativeElement.parentElement;
@@ -209,7 +209,7 @@ export class NavigationUiComponent implements OnInit, AfterViewInit, AfterViewCh
     } else {
       this.active = false;
       const burger = document.querySelector('.menu__icon');
-      burger?.classList.toggle('_active');
+      burger?.classList.remove('_active');
     }
   }
 

@@ -134,7 +134,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    height: 70px;
+    height: 80px;
     background-color: rgb(var(--default-component-background-color));
     z-index: 2;
   }

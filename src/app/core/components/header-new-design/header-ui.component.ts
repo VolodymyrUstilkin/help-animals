@@ -55,6 +55,7 @@ export class HeaderUiComponent implements AfterViewInit, AfterViewChecked, OnDes
 
   @ContentChild(NavigationUiComponent) child!: NavigationUiComponent;
   @ViewChild('burger') burger!: ElementRef;
+  @ViewChild('logo') logo!: ElementRef;
 
   private subscription: Subscription = new Subscription();
 
@@ -68,6 +69,10 @@ export class HeaderUiComponent implements AfterViewInit, AfterViewChecked, OnDes
       forbidenScroll?.classList.toggle('_lock');
 
       this.child.active = element.classList.contains('_active');
+    }));
+
+    this.subscription.add(fromEvent<Event>(this.logo.nativeElement, 'click').subscribe((_) => {
+      this.child.hideMenu();
     }));
   }
 
