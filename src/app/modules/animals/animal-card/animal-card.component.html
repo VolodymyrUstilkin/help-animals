@@ -1,5 +1,7 @@
 <div class="animal-card-container" *ngIf="animalInfo">
-  <img src="{{animalInfo.imgUrl}}" alt="PHOTO" class="animal-card-image">
+  <div class="animal-card-image-container">
+    <img class="animal-card-image" src="{{animalInfo.imgUrl}}" alt="PHOTO">
+  </div>
   <div class="animal-card-main-field">Код тварини: {{animalInfo.id}}</div>
   <div class="animal-card-main-field">Порода: {{animalInfo.breed}}</div>
   <div class="animal-card-main-field">Стать: {{animalInfo.sex}}</div>

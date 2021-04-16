@@ -2,13 +2,19 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  justify-items: stretch;
+  justify-content: stretch;
   grid-gap: 5px;
 }
 
 @media screen and (min-width: 600px) {
   .animal-list-container {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .animal-list-container {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
