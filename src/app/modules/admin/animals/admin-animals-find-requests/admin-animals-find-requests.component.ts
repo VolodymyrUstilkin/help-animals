@@ -10,6 +10,7 @@ import {IAdminOpenedAnimalFindRequestGetResponse} from './models/i-admin-opened-
 import {Convertors} from './models/convertors';
 import {IAdminClosedAnimalFindRequest} from './models/i-admin-closed-animal-find-request';
 import {IAdminClosedAnimalFindRequestGetResponse} from './models/i-admin-closed-animal-find-request-get-response';
+import {getUrlForAdminUserDetails} from '../../users/models/urls';
 
 // const API_ANIMALS_FIND_REQUESTS_URL = environment.fakeApiUrl + '/animals-find-requests/';
 const API_ANIMALS_REQUESTS_OPENED_URL = environment.apiUrl + '/opened-requests';
@@ -114,6 +115,10 @@ export class AdminAnimalsFindRequestsComponent implements OnDestroy {
     this.router.navigate([ADMIN_ANIMALS_FIND_REQUESTS_URL], {
       queryParams: {type}
     });
+  }
+
+  public getRedirectToUserDetailsLink(id: number | string): string {
+    return getUrlForAdminUserDetails(id);
   }
 
   submitErrorHandler(err: Error): void {

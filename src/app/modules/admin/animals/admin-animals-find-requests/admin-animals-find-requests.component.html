@@ -31,7 +31,7 @@
       <tr *ngFor="let request of animalOpenedRequestList">
         <td>{{request.id}}</td>
         <td>{{request.address}}</td>
-        <td>{{request.userCreatedId}}</td>
+        <td><a [routerLink]="getRedirectToUserDetailsLink(request.userOpenedId)">{{request.userOpenedName}}</a></td>
         <td>{{request.openedDate}}</td>
         <td>
           <button class="button center-button"
@@ -56,9 +56,9 @@
       <tr *ngFor="let request of animalClosedRequestList">
         <td>{{request.id}}</td>
         <td>{{request.address}}</td>
-        <td>{{request.userCreatedId}}</td>
+        <td><a [routerLink]="getRedirectToUserDetailsLink(request.userOpenedId)">{{request.userOpenedName}}</a></td>
         <td>{{request.openedDate}}</td>
-        <td>{{request.userClosedId}}</td>
+        <td><a [routerLink]="getRedirectToUserDetailsLink(request.userClosedId)">{{request.userClosedName}}</a></td>
         <td>{{request.closedDate}}</td>
       </tr>
     </table>

@@ -12,7 +12,8 @@ export class Convertors {
       return {
         id: res.id,
         address: res.address,
-        userCreatedId: res.user_created_id,
+        userOpenedId: res.user_created_id,
+        userOpenedName: res.user_name_open,
         openedDate: convertTimestampToLocalDateTime(res.opened_date),
       };
     });
@@ -25,8 +26,10 @@ export class Convertors {
       return {
         id: res.id,
         address: res.address,
-        userCreatedId: res.user_created_id,
+        userOpenedId: res.user_created_id,
+        userOpenedName: res.user_name_open,
         userClosedId: res.user_created_id,
+        userClosedName: res.user_name_close,
         openedDate: convertTimestampToLocalDateTime(res.opened_date),
         closedDate: convertTimestampToLocalDateTime(res.closed_date),
       };

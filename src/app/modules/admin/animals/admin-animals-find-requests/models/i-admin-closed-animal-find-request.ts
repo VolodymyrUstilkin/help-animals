@@ -4,5 +4,7 @@ export interface IAdminClosedAnimalFindRequest {
   openedDate: string;
   closedDate: string;
   userClosedId: string;
-  userCreatedId: string;
+  userClosedName: string;
+  userOpenedId: string;
+  userOpenedName: string;
 }
