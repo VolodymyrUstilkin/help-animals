@@ -19,5 +19,6 @@ export interface IAdminAnimalDetails {
 
   createdAt: string;
   updatedAt: string;
-  editedBy: string;
+  editedById: string;
+  editedByName: string;
 }

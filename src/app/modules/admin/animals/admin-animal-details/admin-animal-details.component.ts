@@ -21,7 +21,8 @@ class AdminAnimalDetails implements IAdminAnimalDetails {
   color = '';
   complexVaccination = false;
   createdAt = '';
-  editedBy = '';
+  editedById = '';
+  editedByName = '';
   features = '';
   id = '';
   imageUrl = '';

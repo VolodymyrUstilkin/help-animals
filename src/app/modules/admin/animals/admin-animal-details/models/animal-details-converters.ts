@@ -41,6 +41,7 @@ export class AnimalDetailsConverters {
   }
 
   public static convertAnimalGetResponseToAdminAnimalDetails(response: IAdminAnimalDetailsGetResponse): IAdminAnimalDetails {
+    const user: {id: string; user_name: string} = JSON.parse(response.edited_by);
     return {
       id: response.id,
       name: response.name,
@@ -59,7 +60,8 @@ export class AnimalDetailsConverters {
       imageUrl: response.image ? environment.apiServerHost + response.image.file.url : '',
       createdAt: convertTimestampToLocalDateTime(response.created_at),
       updatedAt: convertTimestampToLocalDateTime(response.updated_at),
-      editedBy: response.edited_by,
+      editedById: user.id,
+      editedByName: user.user_name,
     };
   }
 
@@ -83,7 +85,7 @@ export class AnimalDetailsConverters {
     printWindow.document.write(convertToHtml(`Відповідальна персона: ${adminAnimalDetails.responsiblePerson}`));
     printWindow.document.write(convertToHtml(`Дата додавання: ${adminAnimalDetails.createdAt}`));
     printWindow.document.write(convertToHtml(`Дата ост. змін: ${adminAnimalDetails.updatedAt}`));
-    printWindow.document.write(convertToHtml(`ID користувача що змінював: ${adminAnimalDetails.editedBy}`));
+    printWindow.document.write(convertToHtml(`ID користувача що змінював: ${adminAnimalDetails.editedById}`));
 
     printWindow.print();
     printWindow.close();
