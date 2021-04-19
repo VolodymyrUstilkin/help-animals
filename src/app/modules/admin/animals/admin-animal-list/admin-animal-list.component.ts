@@ -64,9 +64,13 @@ export class AdminAnimalListComponent implements OnDestroy {
   }
 
   public setSorting(sortingColumn: ESortingTypes): void {
-    this.sorting.column = sortingColumn;
-    this.sorting.direction = ESortingDirections.asc;
-    this.getAnimals();
+    if (sortingColumn !== this.sorting.column) {
+      this.sorting.column = sortingColumn;
+      this.sorting.direction = ESortingDirections.asc;
+      this.getAnimals();
+    } else {
+      this.changeSortingDirection();
+    }
   }
 
   public changeSortingDirection(): void {

@@ -1,9 +1,11 @@
 export enum ESortingTypes {
+  code = 'id',
   age = 'age',
   sterilization = 'sterilization',
   rabiesVaccination = 'rabies_vaccination',
   complexVaccination = 'complex_vaccination',
-  animalHasFamily = 'animal_has_family'
+  animalHasFamily = 'animal_has_family',
+  responsiblePerson = 'responsible_person'
 }
 
 export enum ESortingDirections {
@@ -13,7 +15,7 @@ export enum ESortingDirections {
 
 export class Sorting {
   direction: ESortingDirections = ESortingDirections.asc;
-  column: ESortingTypes = ESortingTypes.age;
+  column: ESortingTypes = ESortingTypes.code;
 
   getTypes(): typeof ESortingTypes {
     return ESortingTypes;

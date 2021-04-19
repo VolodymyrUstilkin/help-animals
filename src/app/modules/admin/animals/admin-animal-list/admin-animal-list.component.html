@@ -5,8 +5,24 @@
 
   <table class="table">
     <tr>
-      <th><span>Код</span></th>
-      <th><span>Відповідальна особа</span></th>
+      <th>
+        <span class="cursor--pointer"
+                [class.selected]="sorting.column === sorting.getTypes().code"
+                (click)="setSorting(sorting.getTypes().code)">Код</span>
+        <span *ngIf="sorting.column===sorting.getTypes().code"
+              (click)="changeSortingDirection()">
+          <app-sorting [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </span>
+      </th>
+      <th>
+        <span class="cursor--pointer"
+        [class.selected]="sorting.column === sorting.getTypes().responsiblePerson"
+        (click)="setSorting(sorting.getTypes().responsiblePerson)">Відповідальна особа</span>
+        <span *ngIf="sorting.column===sorting.getTypes().responsiblePerson"
+              (click)="changeSortingDirection()">
+          <app-sorting [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </span>
+      </th>
       <th>
         <span class="cursor--pointer"
               [class.selected]="sorting.column === sorting.getTypes().age"
