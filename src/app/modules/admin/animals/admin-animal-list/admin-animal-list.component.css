@@ -6,3 +6,19 @@
 .text-align--center{
   text-align: center;
 }
+
+.cursor--pointer{
+  cursor: pointer;
+}
+
+.selected {
+  font-style: oblique;
+
+}
+
+.sorting-arrow {
+  margin-left: 3px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 150%;
+}

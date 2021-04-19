@@ -5,13 +5,50 @@
 
   <table class="table">
     <tr>
-      <th>Код</th>
-      <th>Відповідальна особа</th>
-      <th>Вік</th>
-      <th>Стер</th>
-      <th>Сказ</th>
-      <th>Комп</th>
-      <th>Влаш</th>
+      <th><span>Код</span></th>
+      <th><span>Відповідальна особа</span></th>
+      <th>
+        <span class="cursor--pointer"
+              [class.selected]="sorting.column === sorting.getTypes().age"
+              (click)="setSorting(sorting.getTypes().age)">Вік</span>
+        <span *ngIf="sorting.column===sorting.getTypes().age"
+              (click)="changeSortingDirection()">
+          <app-sorting [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </span>
+      </th>
+      <th>
+        <span class="cursor--pointer" [class.selected]="sorting.column === sorting.getTypes().sterilization"
+              (click)="setSorting(sorting.getTypes().sterilization)">Стер</span>
+        <span *ngIf="sorting.column===sorting.getTypes().sterilization"
+              (click)="changeSortingDirection()">
+          <app-sorting [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </span>
+      </th>
+      <th>
+        <span class="cursor--pointer"
+              [class.selected]="sorting.column === sorting.getTypes().rabiesVaccination"
+              (click)="setSorting(sorting.getTypes().rabiesVaccination)">Сказ</span>
+        <span *ngIf="sorting.column===sorting.getTypes().rabiesVaccination"
+              (click)="changeSortingDirection()">
+          <app-sorting [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </span></th>
+      <th>
+        <span class="cursor--pointer"
+              [class.selected]="sorting.column === sorting.getTypes().complexVaccination"
+              (click)="setSorting(sorting.getTypes().complexVaccination)">Комп</span>
+        <span *ngIf="sorting.column===sorting.getTypes().complexVaccination"
+              (click)="changeSortingDirection()">
+          <app-sorting [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </span></th>
+      <th>
+        <span class="cursor--pointer"
+              [class.selected]="sorting.column === sorting.getTypes().animalHasFamily"
+              (click)="setSorting(sorting.getTypes().animalHasFamily)">Влаш</span>
+        <span *ngIf="sorting.column===sorting.getTypes().animalHasFamily"
+              (click)="changeSortingDirection()">
+          <app-sorting [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </span>
+      </th>
       <th></th>
     </tr>
 
