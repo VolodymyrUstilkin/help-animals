@@ -3,22 +3,58 @@
   grid-gap: 10px;
 }
 
-.text-align--center{
+.admin-animal-list-header {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+}
+
+.filter-section {
+  display: grid;
+  max-width: 600px;
+  justify-items: left;
+  grid-row-gap: 10px;
+}
+
+.filter-section-param {
+  display: grid;
+  justify-content: stretch;
+  align-items: center;
+  min-width: 15rem;
+}
+
+.filter-section-param-value {
+  display: grid;
+  margin-left: 40px;
+  justify-self: stretch;
+}
+
+.container-display-inline {
+  display: grid;
+  justify-content: left;
+  grid-auto-flow: column;
+  align-items: center;
+}
+
+.radio-select {
+  max-width: 10rem;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.radio-select:hover {
+  font-style: italic;
+}
+
+.text-align--center {
   text-align: center;
 }
 
-.cursor--pointer{
+.cursor--pointer {
   cursor: pointer;
 }
 
 .selected {
   font-style: oblique;
-
 }
 
-.sorting-arrow {
-  margin-left: 3px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 150%;
-}

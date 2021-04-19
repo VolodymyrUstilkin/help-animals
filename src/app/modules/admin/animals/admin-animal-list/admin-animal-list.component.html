@@ -1,14 +1,154 @@
 <div class="admin-animal-list-container">
   <div class="admin-animal-list-header">
+    <button type="button" class="button" (click)="filter.changeShowFilter()">=</button>
     <button type="button" class="button" routerLink="{{getRedirectToAddLink()}}">Додати тваринку</button>
   </div>
+
+  <section class="filter-section" *ngIf="filter.showFilter">
+    <div class="filter-section-param">
+      <label class="label filter-section-param-key">Вік:</label>
+      <label class="filter-section-param-value container-display-inline">
+        <input class="input filter-param-input" [(ngModel)]="filter.ageMin" type="number"/>
+        <span>-</span>
+        <input class="input filter-param-input" [(ngModel)]="filter.ageMax" type="number"/>
+      </label>
+    </div>
+
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Відповідальна персона:</div>
+      <label class="label filter-section-param-value">
+        <input class="input filter-param-input" [(ngModel)]="filter.responsiblePerson"/>
+      </label>
+    </div>
+
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Особливості:</div>
+      <label class="filter-section-param-value">
+        <input class="input filter-param-input" [(ngModel)]="filter.features"/>
+      </label>
+    </div>
+
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Стерилізація:</div>
+      <div class="filter-section-param-value">
+        <label class="label container-display-inline radio-select">
+          <span>Не задано:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="sterilization"
+                 checked
+                 (click)="filter.sterilization = filter.getBooleanTypes().notUse"/>
+        </label>
+        <label class="label container-display-inline radio-select">
+          <span>Так:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="sterilization"
+                 (click)="filter.sterilization = filter.getBooleanTypes().true"/>
+        </label>
+
+        <label class="label container-display-inline radio-select">
+          <span>Ні:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="sterilization"
+                 (click)="filter.sterilization = filter.getBooleanTypes().false"/>
+        </label>
+      </div>
+    </div>
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Вакцинація від сказу:</div>
+      <div class="filter-section-param-value">
+        <label class="label container-display-inline radio-select">
+          <span>Не задано:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="rabiesVaccination"
+                 checked
+                 (click)="filter.rabiesVaccination = filter.getBooleanTypes().notUse"/>
+        </label>
+        <label class="label container-display-inline radio-select">
+          <span>Так:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="rabiesVaccination"
+                 (click)="filter.rabiesVaccination = filter.getBooleanTypes().true"/>
+        </label>
+
+        <label class="label container-display-inline radio-select">
+          <span>Ні:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="rabiesVaccination"
+                 (click)="filter.rabiesVaccination = filter.getBooleanTypes().false"/>
+        </label>
+      </div>
+    </div>
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Вакцинація комплексна:</div>
+      <div class="filter-section-param-value">
+        <label class="label container-display-inline radio-select">
+          <span>Не задано:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="complexVaccination"
+                 checked
+                 (click)="filter.complexVaccination = filter.getBooleanTypes().notUse"/>
+        </label>
+        <label class="label container-display-inline radio-select">
+          <span>Так:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="complexVaccination"
+                 (click)="filter.complexVaccination = filter.getBooleanTypes().true"/>
+        </label>
+
+        <label class="label container-display-inline radio-select">
+          <span>Ні:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="complexVaccination"
+                 (click)="filter.complexVaccination = filter.getBooleanTypes().false"/>
+        </label>
+      </div>
+    </div>
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Тварина влаштована:</div>
+      <div class="filter-section-param-value">
+        <label class="label container-display-inline radio-select">
+          <span>Не задано:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="animalHasFamily"
+                 checked
+                 (click)="filter.animalHasFamily = filter.getBooleanTypes().notUse"/>
+        </label>
+        <label class="label container-display-inline radio-select">
+          <span>Так:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="animalHasFamily"
+                 (click)="filter.animalHasFamily = filter.getBooleanTypes().true"/>
+        </label>
+
+        <label class="label container-display-inline radio-select">
+          <span>Ні:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="animalHasFamily"
+                 (click)="filter.animalHasFamily = filter.getBooleanTypes().false"/>
+        </label>
+      </div>
+    </div>
+    <button class="button" (click)="getAnimals()">Застосувати</button>
+  </section>
 
   <table class="table">
     <tr>
       <th>
         <span class="cursor--pointer"
-                [class.selected]="sorting.column === sorting.getTypes().code"
-                (click)="setSorting(sorting.getTypes().code)">Код</span>
+              [class.selected]="sorting.column === sorting.getTypes().code"
+              (click)="setSorting(sorting.getTypes().code)">Код</span>
         <span *ngIf="sorting.column===sorting.getTypes().code"
               (click)="changeSortingDirection()">
           <app-sorting [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
