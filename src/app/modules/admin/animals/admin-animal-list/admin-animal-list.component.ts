@@ -9,6 +9,7 @@ import {ADMIN_ANIMALS_URL, API_ADMIN_ANIMALS_URL} from '../models/urls';
 import {IAdminAnimalListGetResponseElement} from './models/i-admin-animal-list-get-response';
 import {convertResponseToAnimalList} from './models/convert-response-to-animal-list';
 import {ESortingDirections, ESortingTypes, Sorting} from './models/sorting-types';
+import {Filter} from './models/filter';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class AdminAnimalListComponent implements OnDestroy {
   animalList: IAdminAnimalListTableElement[] = [];
   pagination: IPagination;
   sorting = new Sorting();
+  filter = new Filter();
 
   private querySubscription: Subscription;
 
@@ -45,14 +47,18 @@ export class AdminAnimalListComponent implements OnDestroy {
   }
 
   public getAnimals(): void {
-    const httpParams = new HttpParams().appendAll({...this.pagination.getQueryParams(), ...this.sorting.getQueryParams()});
+    const httpParams = new HttpParams().appendAll({
+      ...this.pagination.getQueryParams(),
+      ...this.sorting.getQueryParams(),
+      ...this.filter.getQueryParams()
+    });
     this.httpClient.get<IAdminAnimalListGetResponseElement[]>(API_ADMIN_ANIMALS_URL, {params: httpParams, observe: 'response'})
-      .subscribe((res) => {
-        if (res.body) {
-          this.animalList = convertResponseToAnimalList(res.body);
-          this.pagination.setFromResponseHeaders(res.headers);
-        }
-      });
+        .subscribe((res) => {
+          if (res.body) {
+            this.animalList = convertResponseToAnimalList(res.body);
+            this.pagination.setFromResponseHeaders(res.headers);
+          }
+        });
   }
 
   public getRedirectToAnimalDetailsLink(id: number | string): string {
