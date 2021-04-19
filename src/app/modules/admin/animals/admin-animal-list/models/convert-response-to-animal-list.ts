@@ -9,7 +9,8 @@ export const convertResponseToAnimalList = (response: IAdminAnimalListGetRespons
         rabiesVaccination: resp.rabies_vaccination,
         sterilization: resp.sterilization,
         animalHasFamily: resp.animal_has_family,
-        responsiblePerson: resp.responsible_person
+        responsiblePerson: resp.responsible_person,
+        age: resp.age
       };
     }
   );

@@ -5,4 +5,5 @@ export interface IAdminAnimalListGetResponseElement {
   sterilization: boolean;
   animal_has_family: boolean;
   responsible_person: string;
+  age: string;
 }

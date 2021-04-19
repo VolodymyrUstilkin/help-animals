@@ -7,6 +7,7 @@
     <tr>
       <th>Код</th>
       <th>Відповідальна особа</th>
+      <th>Вік</th>
       <th>Стер</th>
       <th>Сказ</th>
       <th>Комп</th>
@@ -15,13 +16,14 @@
     </tr>
 
     <tr *ngFor="let animal of animalList">
-      <td>{{animal.id}}</td>
+      <td class="text-align--center">{{animal.id}}</td>
       <td>{{animal.responsiblePerson}}</td>
-      <td>{{animal.sterilization ? '&#10004;': '&#10008;'}}</td>
-      <td>{{animal.rabiesVaccination ? '&#10004;' : '&#10008;'}}</td>
-      <td>{{animal.complexVaccination ? '&#10004;' : '&#10008;'}}</td>
-      <td>{{animal.animalHasFamily ? '&#10004;' : '&#10008;'}}</td>
-      <td>
+      <td class="text-align--center">{{animal.age}}</td>
+      <td class="text-align--center">{{animal.sterilization ? '&#10004;' : '&#10008;'}}</td>
+      <td class="text-align--center">{{animal.rabiesVaccination ? '&#10004;' : '&#10008;'}}</td>
+      <td class="text-align--center">{{animal.complexVaccination ? '&#10004;' : '&#10008;'}}</td>
+      <td class="text-align--center">{{animal.animalHasFamily ? '&#10004;' : '&#10008;'}}</td>
+      <td class="text-align--center">
         <a class="admin-animal-list-redirect-edit-animal" routerLink="{{getRedirectToAnimalDetailsLink(animal.id)}}">&#9997;</a>
       </td>
     </tr>

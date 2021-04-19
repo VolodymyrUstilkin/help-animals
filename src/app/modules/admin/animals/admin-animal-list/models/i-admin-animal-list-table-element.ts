@@ -5,4 +5,5 @@ export interface IAdminAnimalListTableElement {
   sterilization: boolean;
   animalHasFamily: boolean;
   responsiblePerson: string;
+  age: string;
 }
