@@ -9,10 +9,13 @@
   justify-content: space-between;
 }
 
+.filter-button {
+}
+
 .filter-section {
   display: grid;
   max-width: 600px;
-  justify-items: left;
+  justify-content: stretch;
   grid-row-gap: 10px;
 }
 
@@ -25,13 +28,13 @@
 
 .filter-section-param-value {
   display: grid;
-  margin-left: 40px;
+  padding-left: 40px;
   justify-self: stretch;
 }
 
 .container-display-inline {
   display: grid;
-  justify-content: left;
+  justify-content: stretch;
   grid-auto-flow: column;
   align-items: center;
 }
@@ -40,6 +43,7 @@
   max-width: 10rem;
   justify-content: space-between;
   cursor: pointer;
+  font-weight: 400;
 }
 
 .radio-select:hover {
@@ -56,5 +60,11 @@
 
 .selected {
   font-style: oblique;
+}
+
+.filter-buttons-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
 }
 

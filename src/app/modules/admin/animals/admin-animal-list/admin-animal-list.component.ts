@@ -83,4 +83,8 @@ export class AdminAnimalListComponent implements OnDestroy {
     this.sorting.direction = this.sorting.direction === ESortingDirections.asc ? ESortingDirections.desc : ESortingDirections.asc;
     this.getAnimals();
   }
+
+  public resetFilter(): void {
+    this.filter = new Filter(true);
+  }
 }

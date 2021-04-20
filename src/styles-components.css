@@ -33,6 +33,7 @@
   font-size: var(--default-component-font-size);
   border: 1px solid rgb(var(--default-component-background-color));
   margin: 3px;
+  min-width: 1em;
 }
 
 .input:read-only {

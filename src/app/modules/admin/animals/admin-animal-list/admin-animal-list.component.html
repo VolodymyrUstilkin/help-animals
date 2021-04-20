@@ -1,6 +1,7 @@
 <div class="admin-animal-list-container">
   <div class="admin-animal-list-header">
-    <button type="button" class="button" (click)="filter.changeShowFilter()">=</button>
+    <button type="button" class="button filter-button" (click)="filter.changeShowFilter()"><img
+      src="/assets/images/settings-icon.svg" alt="="></button>
     <button type="button" class="button" routerLink="{{getRedirectToAddLink()}}">Додати тваринку</button>
   </div>
 
@@ -36,7 +37,7 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="sterilization"
-                 checked
+                 [checked]="filter.sterilization === filter.getBooleanTypes().notUse"
                  (click)="filter.sterilization = filter.getBooleanTypes().notUse"/>
         </label>
         <label class="label container-display-inline radio-select">
@@ -44,6 +45,7 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="sterilization"
+                 [checked]="filter.sterilization === filter.getBooleanTypes().true"
                  (click)="filter.sterilization = filter.getBooleanTypes().true"/>
         </label>
 
@@ -52,6 +54,7 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="sterilization"
+                 [checked]="filter.sterilization === filter.getBooleanTypes().false"
                  (click)="filter.sterilization = filter.getBooleanTypes().false"/>
         </label>
       </div>
@@ -64,7 +67,7 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="rabiesVaccination"
-                 checked
+                 [checked]="filter.rabiesVaccination === filter.getBooleanTypes().notUse"
                  (click)="filter.rabiesVaccination = filter.getBooleanTypes().notUse"/>
         </label>
         <label class="label container-display-inline radio-select">
@@ -72,6 +75,7 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="rabiesVaccination"
+                 [checked]="filter.rabiesVaccination === filter.getBooleanTypes().true"
                  (click)="filter.rabiesVaccination = filter.getBooleanTypes().true"/>
         </label>
 
@@ -80,6 +84,7 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="rabiesVaccination"
+                 [checked]="filter.rabiesVaccination === filter.getBooleanTypes().false"
                  (click)="filter.rabiesVaccination = filter.getBooleanTypes().false"/>
         </label>
       </div>
@@ -92,7 +97,7 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="complexVaccination"
-                 checked
+                 [checked]="filter.complexVaccination === filter.getBooleanTypes().notUse"
                  (click)="filter.complexVaccination = filter.getBooleanTypes().notUse"/>
         </label>
         <label class="label container-display-inline radio-select">
@@ -100,6 +105,7 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="complexVaccination"
+                 [checked]="filter.complexVaccination === filter.getBooleanTypes().true"
                  (click)="filter.complexVaccination = filter.getBooleanTypes().true"/>
         </label>
 
@@ -108,6 +114,7 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="complexVaccination"
+                 [checked]="filter.complexVaccination === filter.getBooleanTypes().false"
                  (click)="filter.complexVaccination = filter.getBooleanTypes().false"/>
         </label>
       </div>
@@ -120,7 +127,7 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="animalHasFamily"
-                 checked
+                 [checked]="filter.animalHasFamily === filter.getBooleanTypes().notUse"
                  (click)="filter.animalHasFamily = filter.getBooleanTypes().notUse"/>
         </label>
         <label class="label container-display-inline radio-select">
@@ -128,6 +135,7 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="animalHasFamily"
+                 [checked]="filter.animalHasFamily === filter.getBooleanTypes().true"
                  (click)="filter.animalHasFamily = filter.getBooleanTypes().true"/>
         </label>
 
@@ -136,11 +144,15 @@
           <input type="radio"
                  class="input filter-param-input"
                  name="animalHasFamily"
+                 [checked]="filter.animalHasFamily === filter.getBooleanTypes().false"
                  (click)="filter.animalHasFamily = filter.getBooleanTypes().false"/>
         </label>
       </div>
     </div>
-    <button class="button" (click)="getAnimals()">Застосувати</button>
+    <div class="filter-buttons-container">
+      <button class="button" (click)="getAnimals()">Застосувати</button>
+      <button class="button" (click)="resetFilter()">Зкинути</button>
+    </div>
   </section>
 
   <table class="table">

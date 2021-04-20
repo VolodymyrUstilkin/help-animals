@@ -20,8 +20,6 @@ interface IGetQueryParams {
 }
 
 export class Filter implements IGetQueryParams {
-  showFilter = false;
-
   ageMin = '';
   ageMax = '';
   responsiblePerson = '';
@@ -31,7 +29,8 @@ export class Filter implements IGetQueryParams {
   complexVaccination = EBooleanTypes.notUse;
   animalHasFamily = EBooleanTypes.notUse;
 
-
+  constructor(public showFilter = false) {
+  }
 
   getQueryParams(): { [param: string]: string } {
     const ret: IFilterRequest = {
