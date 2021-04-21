@@ -20,6 +20,11 @@
   text-align: center;
 }
 
+.error-message {
+  font-size: 100%;
+  color: #F00;
+}
+
 .buttons-container {
   display: grid;
   grid-auto-flow: column;

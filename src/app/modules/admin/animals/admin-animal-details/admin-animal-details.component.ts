@@ -2,7 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserAuthService} from '../../../../core/services/user-auth-service/user-auth.service';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {IAdminAnimalDetailsPostPatchRequest} from './models/i-admin-animal-details-post-patch-request';
 import {AnimalDetailsConverters} from './models/animal-details-converters';
 import {IAdminAnimalDetailsGetResponse} from './models/i-admin-animal-details-get-response';
@@ -56,15 +56,15 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
   loadedPhotoFile?: File;
   imagePreview = '';
 
-  form: FormGroup = this.formBuilder.group({ // todo add validators
+  form: FormGroup = this.formBuilder.group({
       id: new FormControl(''),
       name: new FormControl(''),
-      age: new FormControl(1),
-      breed: new FormControl(''),
-      sex: new FormControl(this.AnimalSexTypes.notUse),
-      color: new FormControl(''),
+      age: new FormControl(0.1, [Validators.min(0.1), Validators.max(20), Validators.required]),
+      breed: new FormControl('', Validators.required),
+      sex: new FormControl(this.AnimalSexTypes.notUse, Validators.required),
+      color: new FormControl('', Validators.required),
       features: new FormControl(''),
-      responsiblePerson: new FormControl(''),
+      responsiblePerson: new FormControl('', Validators.required),
       complexVaccination: new FormControl(false),
       rabiesVaccination: new FormControl(false),
       sterilization: new FormControl(false),
@@ -77,6 +77,7 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
   showEditAnimalButton = false;
   showPrintButton = false;
   showRollbackButton = false;
+  showValidatorHelpers = false;
 
   userChangeSubscription: Subscription;
 
@@ -89,7 +90,10 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
     this.updateButtons();
 
     this.userChangeSubscription = userAuthService.userUpdatedEvent
-      .subscribe((user) => this.animalsChangePermission = user.permissionForAddEditAndRemoveAnimals);
+      .subscribe((user) => {
+        this.animalsChangePermission = user.permissionForAddEditAndRemoveAnimals;
+        this.updateButtons();
+      });
 
     this.form.valueChanges.subscribe(() => {
       this.formWasChanged = true;
@@ -158,6 +162,7 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
 
   submitEditAnimal(): void {
     if (this.form.invalid) {
+      this.showValidatorHelpers = true;
       alert('У формі є помилки');
       return;
     }
@@ -177,6 +182,7 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
 
   submitAddAnimal(): void {
     if (this.form.invalid) {
+      this.showValidatorHelpers = true;
       alert('У формі є помилки');
       return;
     }

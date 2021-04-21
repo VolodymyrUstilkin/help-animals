@@ -32,7 +32,8 @@
              type="number"
              step="0.1"
              min="0.1"
-             max="300"/>
+             max="20"/>
+      <p class="error-message" *ngIf="form.controls.age.invalid && showValidatorHelpers">Обов'язкове (0.1 - 20)</p>
     </div>
 
     <div class="admin-details-form-field-container">
@@ -42,6 +43,7 @@
              formControlName="breed"
              [readonly]="formReadonlyFieldCheck()"
              type="text"/>
+      <p class="error-message" *ngIf="form.controls.breed.invalid && showValidatorHelpers">Обов'язкове</p>
     </div>
 
     <div class="admin-details-form-field-container">
@@ -63,6 +65,7 @@
         <option value="{{AnimalSexTypes.female}}"
                 [selected]="form.value.sex === AnimalSexTypes.female">{{AnimalSexTypes.female}}</option>
       </select>
+      <p class="error-message" *ngIf="form.controls.sex.invalid && showValidatorHelpers">Обов'язкове</p>
     </div>
 
     <div class="admin-details-form-field-container">
@@ -72,6 +75,7 @@
              formControlName="color"
              [readonly]="formReadonlyFieldCheck()"
              type="text"/>
+      <p class="error-message" *ngIf="form.controls.color.invalid && showValidatorHelpers">Обов'язкове</p>
     </div>
 
     <div class="admin-details-form-field-container">
@@ -90,6 +94,7 @@
                 formControlName="responsiblePerson"
                 [readonly]="formReadonlyFieldCheck()"
                 type="text"></textarea>
+      <p class="error-message" *ngIf="form.controls.responsiblePerson.invalid && showValidatorHelpers">Обов'язкове</p>
     </div>
 
     <div class="admin-details-form-field-container">
@@ -142,13 +147,12 @@
             type="button"
             *ngIf="showEditAnimalButton"
             (click)="submitEditAnimal()"
-            [disabled]="form.invalid || !formWasChanged">Підтвердити зміни
+            [disabled]="!formWasChanged">Підтвердити зміни
     </button>
     <button class="button admin-details-form-field-submit-button"
             type="button"
             *ngIf="showCreateAnimalButton"
-            (click)="submitAddAnimal()"
-            [disabled]="form.invalid">Додати тварину
+            (click)="submitAddAnimal()">Додати тварину
     </button>
     <button class="button admin-details-form-field-submit-button"
             type="button"
