@@ -2,6 +2,7 @@ import { animate, keyframes, query, state, style, transition, trigger } from '@a
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { UserAuthService } from 'src/app/core/services/user-auth-service/user-auth.service';
+import { elementAppearanceAnimation, initialMenuAnimation } from '../../animations/header-animation';
 
 const BASE_URL = '/';
 
@@ -20,60 +21,8 @@ class NavMenuItem implements INavMenuItem {
   templateUrl: './navigation-ui.component.html',
   styleUrls: ['./navigation-ui.component.css'],
   animations: [
-    trigger('slideRight', [
-      transition('initial => expanded', animate('0.5s ease-in-out', keyframes([
-        style({
-          transform: 'translateX(150px)',
-          opacity: '0',
-          offset: 0
-        }),
-        style({
-          transform: 'translateX(-50px)',
-          opacity: '0.8',
-          offset: 0.8
-        }),
-        style({
-          transform: 'translateX(0)',
-          opacity: '1',
-          offset: 1
-        })
-      ])))
-    ]),
-    trigger('addingItems', [
-      state(':enter', style({
-          transform: 'scale(0)'
-      })),
-      state(':leave', style({
-          transform: 'scale(1)'
-      })),
-      transition('* <=> *', animate('.5s ease-in-out', keyframes([
-        style({
-          transform: 'scale(0)',
-          opacity: '0',
-          offset: 0
-        }),
-        style({
-          transform: 'scale(0.4)',
-          opacity: '0.4',
-          offset: 0.4
-        }),
-        style({
-          transform: 'scale(0.6)',
-          opacity: '0.6',
-          offset: 0.6
-        }),
-        style({
-          transform: 'scale(0.8)',
-          opacity: '0.8',
-          offset: 0.8
-        }),
-        style({
-          transform: 'scale(1)',
-          opacity: '1',
-          offset: 1
-        })
-      ])))
-    ])
+    initialMenuAnimation,
+    elementAppearanceAnimation
   ]
 })
 

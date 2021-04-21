@@ -68,7 +68,7 @@
   padding: 10px;
   background:#2f2e41;
   border-bottom: 1px solid rgba(47, 46, 65,0.2);
-  transition: .5s;
+  transition: all .5s ease;
   border-radius: 10px;
 }
 

@@ -94,4 +94,8 @@
   flex-direction: column;
   padding: 0 0 10px 0;
 }
+
+.wrapper .main .container .phone .phone__items{
+  padding-bottom: 5px;
+}
 }

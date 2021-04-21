@@ -1,6 +1,7 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
+import { initialLogoAnimation, initialMenuAnimation } from '../../animations/header-animation';
 import { NavigationUiComponent } from '../navigation-new-design/navigation-ui.component';
 
 @Component({
@@ -8,44 +9,8 @@ import { NavigationUiComponent } from '../navigation-new-design/navigation-ui.co
   templateUrl: './header-ui.component.html',
   styleUrls: ['./header-ui.component.css'],
   animations: [
-    trigger('slideLeft', [
-      transition('initial => expanded', animate('0.5s ease-in-out', keyframes([
-        style({
-          transform: 'translateX(-150px)',
-          opacity: '0',
-          offset: 0
-        }),
-        style({
-          transform: 'translateX(50px)',
-          opacity: '0.8',
-          offset: 0.8
-        }),
-        style({
-          transform: 'translateX(0)',
-          opacity: '1',
-          offset: 1
-        })
-      ])))
-    ]),
-    trigger('slideRight', [
-      transition('initial => expanded', animate('0.5s ease-in-out', keyframes([
-        style({
-          transform: 'translateX(150px)',
-          opacity: '0',
-          offset: 0
-        }),
-        style({
-          transform: 'translateX(-50px)',
-          opacity: '0.8',
-          offset: 0.8
-        }),
-        style({
-          transform: 'translateX(0)',
-          opacity: '1',
-          offset: 1
-        })
-      ])))
-    ]),
+    initialLogoAnimation,
+    initialMenuAnimation
   ]
 })
 export class HeaderUiComponent implements AfterViewInit, AfterViewChecked, OnDestroy {

@@ -1,10 +1,26 @@
-<div class="animal-card-container" *ngIf="animalInfo">
-  <div class="animal-card-image-container">
-    <img class="animal-card-image" src="{{animalInfo.imgUrl}}" alt="PHOTO">
+<div class="card" *ngIf="animalInfo">
+  <div class="card__front" [ngClass]="{'active': active}">
+    <figure class="picture__box">
+      <img class="picture__box-image" src="{{animalInfo.imgUrl}}" alt="PHOTO">
+    </figure>
+    <div class="card__front-button" #forward>
+      <div class="arrow"></div>
+      <div class="arrow"></div>
+      <div class="arrow"></div>
+    </div>
   </div>
-  <div class="animal-card-main-field">Код тварини: {{animalInfo.id}}</div>
-  <div class="animal-card-main-field">Порода: {{animalInfo.breed}}</div>
-  <div class="animal-card-main-field">Стать: {{animalInfo.sex}}</div>
-  <div class="animal-card-main-field">Масть: {{animalInfo.color}}</div>
-  <div class="animal-card-secondary-field">Особливості: {{animalInfo.features}}</div>
+  <div class="card__back" [ngClass]="{'active': !active}">
+    <div class="card__front-button" #back>
+      <div class="arrow"></div>
+      <div class="arrow"></div>
+      <div class="arrow"></div>
+    </div>
+    <ul class="list">
+      <li><p>Код тварини:</p><p>{{animalInfo.id}}</p></li>
+      <li><p>Порода:</p><p>{{animalInfo.breed}}</p></li>
+      <li><p>Стать:</p><p>{{animalInfo.sex}}</p></li>
+      <li><p>Масть:</p><p>{{animalInfo.color}}</p></li>
+      <li><p class="list__features">Особливості:</p><p>{{animalInfo.features}}</p></li>
+    </ul>
+  </div>
 </div>
