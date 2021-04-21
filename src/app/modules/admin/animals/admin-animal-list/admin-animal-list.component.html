@@ -5,7 +5,7 @@
     <button type="button" class="button" routerLink="{{getRedirectToAddLink()}}">Додати тваринку</button>
   </div>
 
-  <section class="filter-section" *ngIf="filter.showFilter">
+  <section class="filter-section" [class.filter-hide]="!filter.showFilter">
     <div class="filter-section-param">
       <label class="label filter-section-param-key">Вік:</label>
       <label class="filter-section-param-value container-display-inline">
