@@ -1,6 +1,7 @@
 export enum ESortingTypes {
   code = 'id',
   age = 'age',
+  features = 'features',
   sterilization = 'sterilization',
   rabiesVaccination = 'rabies_vaccination',
   complexVaccination = 'complex_vaccination',
@@ -25,11 +26,15 @@ export class Sorting {
     return ESortingDirections;
   }
 
+  // getQueryParams(): { [param: string]: string } {
+  //   return {
+  //     sort_column: this.column,
+  //     sort_direction: this.direction
+  //   };
+  // }
+
   getQueryParams(): { [param: string]: string } {
-    return {
-      sort_column: this.column,
-      sort_direction: this.direction
-    };
+    return {[this.column]: this.direction};
   }
 }
 

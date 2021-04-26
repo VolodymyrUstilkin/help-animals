@@ -10,7 +10,8 @@ export const convertResponseToAnimalList = (response: IAdminAnimalListGetRespons
         sterilization: resp.sterilization,
         animalHasFamily: resp.animal_has_family,
         responsiblePerson: resp.responsible_person,
-        age: resp.age
+        age: resp.age,
+        features: resp.features
       };
     }
   );

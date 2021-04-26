@@ -47,18 +47,23 @@ export class AdminAnimalListComponent implements OnDestroy {
   }
 
   public getAnimals(): void {
+    const order = this.sorting.getQueryParams();
+    const filter = this.filter.getQueryParams();
+    const body = {
+      order,
+      filter
+    };
+
     const httpParams = new HttpParams().appendAll({
       ...this.pagination.getQueryParams(),
-      ...this.sorting.getQueryParams(),
-      ...this.filter.getQueryParams()
     });
-    this.httpClient.get<IAdminAnimalListGetResponseElement[]>(API_ADMIN_ANIMALS_URL, {params: httpParams, observe: 'response'})
-        .subscribe((res) => {
-          if (res.body) {
-            this.animalList = convertResponseToAnimalList(res.body);
-            this.pagination.setFromResponseHeaders(res.headers);
-          }
-        });
+    this.httpClient.patch<IAdminAnimalListGetResponseElement[]>(API_ADMIN_ANIMALS_URL, body, {params: httpParams, observe: 'response'})
+      .subscribe((res) => {
+        if (res) {
+          this.animalList = convertResponseToAnimalList(res.body as IAdminAnimalListGetResponseElement[]);
+          this.pagination.setFromResponseHeaders(res.headers);
+        }
+      });
   }
 
   public getRedirectToAnimalDetailsLink(id: number | string): string {

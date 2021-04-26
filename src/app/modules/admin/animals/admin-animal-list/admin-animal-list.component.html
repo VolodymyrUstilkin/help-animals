@@ -177,6 +177,15 @@
       </th>
       <th>
         <span class="cursor--pointer"
+              [class.selected]="sorting.column === sorting.getTypes().features"
+              (click)="setSorting(sorting.getTypes().features)">Особливості</span>
+        <span *ngIf="sorting.column===sorting.getTypes().features"
+              (click)="changeSortingDirection()">
+          <app-sorting [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </span>
+      </th>
+      <th>
+        <span class="cursor--pointer"
               [class.selected]="sorting.column === sorting.getTypes().age"
               (click)="setSorting(sorting.getTypes().age)">Вік</span>
         <span *ngIf="sorting.column===sorting.getTypes().age"
@@ -223,6 +232,7 @@
     <tr *ngFor="let animal of animalList">
       <td class="text-align--center">{{animal.id}}</td>
       <td>{{animal.responsiblePerson}}</td>
+      <td>{{animal.features}}</td>
       <td class="text-align--center">{{animal.age}}</td>
       <td class="text-align--center">{{animal.sterilization ? '&#10004;' : '&#10008;'}}</td>
       <td class="text-align--center">{{animal.rabiesVaccination ? '&#10004;' : '&#10008;'}}</td>
