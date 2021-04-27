@@ -5,8 +5,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
-  grid-row-gap: 15px;
-  grid-column-gap: 15px;
+  grid-row-gap: 20px;
+  justify-items: center;
 }
 
 @media screen and (min-width: 600px) {

@@ -4,10 +4,11 @@ import {LoginComponent} from './login/login.component';
 import {LoginRouting} from './login.routing';
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
+import { CheckboxComponent } from 'src/app/core/components/checkbox/checkbox.component';
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, CheckboxComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(LoginRouting),

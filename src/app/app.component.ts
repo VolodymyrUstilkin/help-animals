@@ -1,6 +1,7 @@
-import {AfterContentInit, Component, ElementRef} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { routeChangeAnimation } from './core/animations/change-route-animation';
+import * as WebFont from 'webfontloader';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,17 @@ import { routeChangeAnimation } from './core/animations/change-route-animation';
     routeChangeAnimation
   ]
 })
-export class AppComponent implements AfterContentInit {
+export class AppComponent implements OnInit, AfterContentInit {
   asideNeedShow = false;
 
-  constructor(private elRef: ElementRef) {
+  constructor(private elRef: ElementRef) {}
+
+  ngOnInit(): void {
+    WebFont.load({
+      google: {
+        families: ['Montserrat:wght@400;500;600;700;800;900&display=swap']
+      }
+    });
   }
 
   ngAfterContentInit(): void {

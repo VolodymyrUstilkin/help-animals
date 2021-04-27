@@ -21,10 +21,11 @@
     <div class="error-message" *ngIf="loginForm.controls.password.invalid">Required</div>
 
     <div class="remember-container new-line-padding">
-      <div class="remember-container-left">
+      <!-- <div class="remember-container-left">
         <label for="remember" class="label">Запам'ятати:</label>
         <input id="remember" type="checkbox" class="input" name="remember" formControlName="remember">
-      </div>
+      </div> -->
+      <app-checkbox formControlName="remember" [text]="'Запам`ятати:'"></app-checkbox>
       <div class="remember-container-right">
         <a class="remember-container-link" routerLink="/passwordrecovery">Забули пароль?</a>
       </div>
