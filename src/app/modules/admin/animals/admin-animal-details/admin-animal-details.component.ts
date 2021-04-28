@@ -129,6 +129,18 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
       });
       this.formWasChanged = false;
       this.updateButtons();
+    }, error => {
+      const errCode = error.error.error.error_code;
+      const errMsg = error.error.error.message;
+      switch (errCode) {
+        case 404:
+          console.error('page not found');
+          this.router.navigateByUrl('/404');
+          break;
+        default:
+          console.error(`Request error: ${errMsg}`);
+          alert('Сталася помилка');
+      }
     });
   }
 
@@ -177,7 +189,19 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
 
     this.httpClient.patch(url, reqForm).subscribe(() => {
       this.getAnimal(this.form.value.id);
-    }, (err) => this.submitErrorHandler(err));
+    }, error => {
+      const errCode = error.error.error.error_code;
+      const errMsg = error.error.error.message;
+      switch (errCode) {
+        case 400:
+          console.error(`Request error: ${errMsg}`);
+          alert('Введено не коректні дані');
+          break;
+        default:
+          console.error(`Request error: ${errMsg}`);
+          alert('Сталася помилка при відправці форми');
+      }
+    });
   }
 
   submitAddAnimal(): void {
@@ -195,11 +219,19 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
     const reqForm = AnimalDetailsConverters.convertAnimalPostPatchRequestToFormData(req);
     this.httpClient.post<{ id: string }>(API_ADMIN_ANIMALS_URL, reqForm).subscribe((res) => {
       this.router.navigateByUrl(`${ADMIN_ANIMALS_URL}/${res.id}`);
-    }, (err) => this.submitErrorHandler(err));
-  }
-
-  submitErrorHandler(err: Error): void {
-    alert('Сталася помилка при відправці форми: ' + err.message);
+    }, error => {
+      const errCode = error.error.error.error_code;
+      const errMsg = error.error.error.message;
+      switch (errCode) {
+        case 400:
+          console.error(`Request error: ${errMsg}`);
+          alert('Введено не коректні дані');
+          break;
+        default:
+          console.error(`Request error: ${errMsg}`);
+          alert('Сталася помилка при відправці форми');
+      }
+    });
   }
 
   printAnimal(): void {

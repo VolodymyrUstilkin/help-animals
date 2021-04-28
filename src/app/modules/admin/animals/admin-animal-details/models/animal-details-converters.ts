@@ -41,7 +41,10 @@ export class AnimalDetailsConverters {
   }
 
   public static convertAnimalGetResponseToAdminAnimalDetails(response: IAdminAnimalDetailsGetResponse): IAdminAnimalDetails {
-    const user: {id: string; user_name: string} = JSON.parse(response.edited_by);
+    // const user: {id: string; user_name: string} = JSON.parse(response.edited_by);
+    const user: { id: string; user_name: string } = response.edited_by
+      ? JSON.parse(response.edited_by)
+      : {id: '', user_name: ''}; // response.edited_by can be null
     return {
       id: response.id,
       name: response.name,

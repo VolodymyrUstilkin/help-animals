@@ -54,7 +54,20 @@ export class LoginComponent implements OnInit {
         this.tokenAuthService.setToken(resp.token);
         this.router.navigate(['']);
       }, error => {
-        console.log(error);
+        const errCode = error.error.error.error_code;
+        const errMsg = error.error.error.message;
+        switch (errCode) {
+          case 400:
+            console.error(errMsg);
+            alert('Невірний логин або пароль');
+            break;
+          case 401:
+            console.error(errMsg);
+            alert('Невірний логин або пароль');
+            break;
+          default:
+            console.error(errMsg);
+        }
       });
     this.loginForm.patchValue({password: ''});
   }
