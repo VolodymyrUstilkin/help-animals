@@ -134,7 +134,7 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
       const errMsg = error.error.error.message;
       switch (errCode) {
         case 404:
-          console.error('page not found');
+          console.error(`Page: "${API_ADMIN_ANIMALS_URL}/${id}" not found`);
           this.router.navigateByUrl('/404');
           break;
         default:
