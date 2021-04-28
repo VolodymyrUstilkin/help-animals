@@ -6,7 +6,6 @@
     "start": "ng serve",
     "buildProduction": "ng build --prod",
     "startExpressServer": "node ./server/server.js 8000",
-    "buildForGithubPages": "ng build --prod  --output-path docs --base-href ./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
