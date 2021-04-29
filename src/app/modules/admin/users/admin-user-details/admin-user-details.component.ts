@@ -1,6 +1,6 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserAuthService} from '../../../../core/services/user-auth-service/user-auth.service';
 import {IAdminUserDetailsGetResponse} from './models/i-admin-user-details-get-response';
 import {IAdminUserDetails} from './models/i-admin-user-details';
@@ -33,7 +33,8 @@ export class AdminUserDetailsComponent implements AfterViewInit {
 
   constructor(private httpClient: HttpClient,
               private activatedRouter: ActivatedRoute,
-              public userAuthService: UserAuthService) {
+              public userAuthService: UserAuthService,
+              private router: Router) {
   }
 
   ngAfterViewInit(): void {
@@ -64,6 +65,18 @@ export class AdminUserDetailsComponent implements AfterViewInit {
           updatedAt: convertTimestampToLocalDateTime(res.updated_at),
           editedBy: res.edited_by
         };
+      }, error => {
+        const errCode = error.error.error.error_code;
+        const errMsg = error.error.error.message;
+        switch (errCode) {
+          case 404:
+            console.error(`Page: "${API_ADMIN_USERS_URL}/${id}" not found`);
+            this.router.navigateByUrl('/404');
+            break;
+          default:
+            console.error(`Request error: ${errMsg}`);
+            alert('Сталася помилка при загрузці сторінки');
+        }
       });
   }
 }

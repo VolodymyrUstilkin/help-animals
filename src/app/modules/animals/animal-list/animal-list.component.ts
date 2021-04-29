@@ -48,6 +48,17 @@ export class AnimalListComponent implements OnDestroy {
           this.animalList = convertAnimalGetResponseToAnimalList(res.body);
           this.pagination.setFromResponseHeaders(res.headers);
         }
+      }, error => {
+        const errCode = error.error.error.error_code;
+        const errMsg = error.error.error.message;
+        switch (errCode) {
+          case 404:
+            console.error(`Page: "${API_GET_ANIMALS_URL}" not found`);
+            break;
+          default:
+            console.error(`Request error: ${errMsg}`);
+            alert('Сталася помилка при загрузці сторінки');
+        }
       });
   }
 }

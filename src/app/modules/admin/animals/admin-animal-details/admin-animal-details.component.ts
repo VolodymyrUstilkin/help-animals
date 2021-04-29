@@ -139,7 +139,7 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
           break;
         default:
           console.error(`Request error: ${errMsg}`);
-          alert('Сталася помилка');
+          alert('Сталася помилка при загрузці сторінки');
       }
     });
   }
@@ -193,13 +193,13 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
       const errCode = error.error.error.error_code;
       const errMsg = error.error.error.message;
       switch (errCode) {
-        case 400:
-          console.error(`Request error: ${errMsg}`);
-          alert('Введено не коректні дані');
+        case 404:
+          console.error(`Page: "${url}" not found`);
+          this.router.navigateByUrl('/404');
           break;
         default:
           console.error(`Request error: ${errMsg}`);
-          alert('Сталася помилка при відправці форми');
+          alert('Сталася помилка при загрузці сторінки');
       }
     });
   }

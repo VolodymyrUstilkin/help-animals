@@ -12,7 +12,6 @@ import {IAdminClosedAnimalFindRequest} from './models/i-admin-closed-animal-find
 import {IAdminClosedAnimalFindRequestGetResponse} from './models/i-admin-closed-animal-find-request-get-response';
 import {getUrlForAdminUserDetails} from '../../users/models/urls';
 
-// const API_ANIMALS_FIND_REQUESTS_URL = environment.fakeApiUrl + '/animals-find-requests/';
 const API_ANIMALS_REQUESTS_OPENED_URL = environment.apiUrl + '/opened-requests';
 const API_ANIMALS_REQUESTS_CLOSED_URL = environment.apiUrl + '/closed-requests';
 const ADMIN_ANIMALS_FIND_REQUESTS_URL = '/admin/animals/find-requests';
@@ -75,6 +74,18 @@ export class AdminAnimalsFindRequestsComponent implements OnDestroy {
           this.animalOpenedRequestList = Convertors.convertOpenedAnimalFindRequestGetResponseToOpenedAnimalFindRequest(res.body);
           this.pagination.setFromResponseHeaders(res.headers);
         }
+      }, error => {
+        const errCode = error.error.error.error_code;
+        const errMsg = error.error.error.message;
+        switch (errCode) {
+          case 404:
+            console.error(`Page: "${API_ANIMALS_REQUESTS_OPENED_URL}" not found`);
+            this.router.navigateByUrl('/404');
+            break;
+          default:
+            console.error(`Request error: ${errMsg}`);
+            alert('Сталася помилка при загрузці сторінки');
+        }
       });
     } else {
       this.httpClient.get<IAdminClosedAnimalFindRequestGetResponse[]>(API_ANIMALS_REQUESTS_CLOSED_URL, {
@@ -84,6 +95,18 @@ export class AdminAnimalsFindRequestsComponent implements OnDestroy {
         if (res.body) {
           this.animalClosedRequestList = Convertors.convertClosedAnimalFindRequestGetResponseToClosedAnimalFindRequest(res.body);
           this.pagination.setFromResponseHeaders(res.headers);
+        }
+      }, error => {
+        const errCode = error.error.error.error_code;
+        const errMsg = error.error.error.message;
+        switch (errCode) {
+          case 404:
+            console.error(`Page: "${API_ANIMALS_REQUESTS_OPENED_URL}" not found`);
+            this.router.navigateByUrl('/404');
+            break;
+          default:
+            console.error(`Request error: ${errMsg}`);
+            alert('Сталася помилка при загрузці сторінки');
         }
       });
     }
@@ -96,7 +119,19 @@ export class AdminAnimalsFindRequestsComponent implements OnDestroy {
     // this.httpClient.patch(url, JSON.stringify({id}), {headers}).subscribe((resp) => {
     this.httpClient.patch(url, null).subscribe(() => {
       this.getAnimalsFindRequests();
-    }, (err) => this.submitErrorHandler(err));
+    }, error => {
+      const errCode = error.error.error.error_code;
+      const errMsg = error.error.error.message;
+      switch (errCode) {
+        case 404:
+          console.error(`Page: "${API_ANIMALS_REQUESTS_OPENED_URL}" not found`);
+          this.router.navigateByUrl('/404');
+          break;
+        default:
+          console.error(`Request error: ${errMsg}`);
+          alert('Сталася помилка при загрузці сторінки');
+      }
+    });
   }
 
   public createAnimalFindRequest(): void {
@@ -106,7 +141,19 @@ export class AdminAnimalsFindRequestsComponent implements OnDestroy {
     this.httpClient.post(API_ANIMALS_REQUESTS_OPENED_URL, JSON.stringify(animalFindRequest), {headers}).subscribe(() => {
       this.getAnimalsFindRequests();
       this.newRequestAddress = '';
-    }, (err) => this.submitErrorHandler(err));
+    }, error => {
+      const errCode = error.error.error.error_code;
+      const errMsg = error.error.error.message;
+      switch (errCode) {
+        case 400:
+          console.error(errMsg);
+          alert('Некоректна адреса');
+          break;
+        default:
+          console.error(`Request error: ${errMsg}`);
+          alert('Сталася помилка при загрузці сторінки');
+      }
+    });
   }
 
   changeQueryFilterParams(type: string): void {
@@ -119,9 +166,5 @@ export class AdminAnimalsFindRequestsComponent implements OnDestroy {
 
   public getRedirectToUserDetailsLink(id: number | string): string {
     return getUrlForAdminUserDetails(id);
-  }
-
-  submitErrorHandler(err: Error): void {
-    alert('Сталася помилка при відправці форми: ' + err.message);
   }
 }
