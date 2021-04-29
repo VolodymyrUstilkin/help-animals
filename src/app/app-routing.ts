@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PageNotFoundComponent} from './core/components/page-not-found/page-not-found.component';
+import {AdminGuard} from './modules/admin/guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate: [AdminGuard],
     loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
   },
   {
