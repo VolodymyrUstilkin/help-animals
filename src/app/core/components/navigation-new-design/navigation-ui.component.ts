@@ -53,6 +53,14 @@ export class NavigationUiComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   ngAfterViewInit(): void {
+    if (this.menu.first) {
+      fromEvent<Event>(this.menu.first.nativeElement, 'click')
+        .subscribe((event) => {
+          const parent = (event.target as HTMLElement).closest('li');
+          parent?.classList.toggle('_active');
+        });
+    }
+
     this.subscription.add(this.menu.changes.subscribe((element) => {
       element.toArray().forEach((elem: ElementRef) => {
         fromEvent<Event>(elem.nativeElement, 'click')

@@ -9,6 +9,7 @@ import {IUserAuthPermissions} from './models/i-user-auth-permissions';
 import {IUserAuthResponse} from './models/i-user-auth-response';
 
 const GET_CURRENT_USER_API_URL = environment.apiUrl + '/login';
+const STORAGE_USER_NAME = 'user';
 
 class UserAuthPermissionsDefault implements IUserAuthPermissions {
   isActive = false;
@@ -37,6 +38,11 @@ export class UserAuthService {
   public tokenUpdatedEventSubscription: Subscription;
 
   constructor(private httpClient: HttpClient, private router: Router, private tokenAuthService: TokenAuthService) {
+    const user = localStorage.getItem(STORAGE_USER_NAME);
+    if (user) {
+       this.currentUser = JSON.parse(atob(user));
+    }
+
     this.userUpdatedEvent = new BehaviorSubject(this.currentUser);
     this.tokenUpdatedEventSubscription = tokenAuthService.tokenUpdatedEvent.subscribe(() => this.loadUserFromServer());
   }
@@ -50,7 +56,13 @@ export class UserAuthService {
   }
 
   public setUser(user: IUserAuth | null): void {
-    this.currentUser = user ? user : userGuest;
+    if (user) {
+      this.currentUser = user;
+      localStorage.setItem(STORAGE_USER_NAME, btoa(JSON.stringify(this.currentUser)));
+    } else {
+      this.currentUser = userGuest;
+      localStorage.removeItem(STORAGE_USER_NAME);
+    }
     this.userUpdatedEvent.next(this.currentUser);
   }
 
