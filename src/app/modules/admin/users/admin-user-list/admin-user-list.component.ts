@@ -8,6 +8,8 @@ import {IAdminUserListTableElement} from './models/i-admin-user-list-table-eleme
 import {ADMIN_USERS_URL, API_ADMIN_USERS_URL, getUrlForAdminUserDetails} from '../models/urls';
 import {IAdminUserListGetResponseElement} from './models/i-admin-user-list-get-response-element';
 import {convertResponseToUserList} from './models/convert-response-to-user-list';
+import {Filter} from './models/filter';
+import {ESortingDirections, ESortingTypes, Sorting} from './models/sorting-types';
 
 
 @Component({
@@ -18,6 +20,8 @@ import {convertResponseToUserList} from './models/convert-response-to-user-list'
 export class AdminUserListComponent implements OnDestroy {
   userList: IAdminUserListTableElement[] = [];
   pagination: IPagination;
+  filter = new Filter();
+  sorting = new Sorting();
 
   private querySubscription: Subscription;
 
@@ -47,9 +51,47 @@ export class AdminUserListComponent implements OnDestroy {
           this.pagination.setFromResponseHeaders(res.headers);
         }
       });
+
+
+    // const order = this.sorting.getQueryParams();
+    // const filter = this.filter.getQueryParams();
+    // const body = {
+    //   order,
+    //   filter
+    // };
+    //
+    // const httpParams = new HttpParams().appendAll({
+    //   ...this.pagination.getQueryParams(),
+    // });
+    // this.httpClient.patch<IAdminUserListGetResponseElement[]>(API_ADMIN_USERS_URL, body, {params: httpParams, observe: 'response'})
+    //   .subscribe((res) => {
+    //     if (res) {
+    //       this.userList = convertResponseToUserList(res.body as IAdminUserListGetResponseElement[]);
+    //       this.pagination.setFromResponseHeaders(res.headers);
+    //     }
+    //   });
   }
 
   public getRedirectToUserDetailsLink(id: number | string): string {
     return getUrlForAdminUserDetails(id);
+  }
+
+  public resetFilter(): void {
+    this.filter = new Filter(true);
+  }
+
+  public setSorting(sortingColumn: ESortingTypes): void {
+    if (sortingColumn !== this.sorting.column) {
+      this.sorting.column = sortingColumn;
+      this.sorting.direction = ESortingDirections.asc;
+      this.getUsers();
+    } else {
+      this.changeSortingDirection();
+    }
+  }
+
+  public changeSortingDirection(): void {
+    this.sorting.direction = this.sorting.direction === ESortingDirections.asc ? ESortingDirections.desc : ESortingDirections.asc;
+    this.getUsers();
   }
 }

@@ -1,20 +1,249 @@
 <div class="admin-user-list-container">
   <div class="admin-animal-list-header">
-<!--    <button type="button" class="button" routerLink="{{getRedirectToUsersControl()}}">Додати користувача</button>-->
+    <button type="button" class="button filter-button" (click)="filter.changeShowFilter()"><img
+      src="/assets/images/settings-icon.svg" alt="="></button>
   </div>
+
+  <section class="filter-section" [class.filter-hide]="!filter.showFilter">
+    <div class="filter-section-param">
+      <label class="label filter-section-param-key">Ім'я:</label>
+      <label class="filter-section-param-value container-display-inline">
+        <input class="input filter-param-input" [(ngModel)]="filter.name" type="text"/>
+      </label>
+    </div>
+
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Email:</div>
+      <label class="label filter-section-param-value">
+        <input class="input filter-param-input" [(ngModel)]="filter.email"/>
+      </label>
+    </div>
+
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Телефон:</div>
+      <label class="filter-section-param-value">
+        <input class="input filter-param-input" [(ngModel)]="filter.phone"/>
+      </label>
+    </div>
+
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Діючий:</div>
+      <div class="filter-section-param-value">
+        <label class="label container-display-inline radio-select">
+          <span>Не задано:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="sterilization"
+                 [checked]="filter.active === filter.getBooleanTypes().notUse"
+                 (click)="filter.active = filter.getBooleanTypes().notUse"/>
+        </label>
+        <label class="label container-display-inline radio-select">
+          <span>Так:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="sterilization"
+                 [checked]="filter.active === filter.getBooleanTypes().true"
+                 (click)="filter.active = filter.getBooleanTypes().true"/>
+        </label>
+
+        <label class="label container-display-inline radio-select">
+          <span>Ні:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="sterilization"
+                 [checked]="filter.active === filter.getBooleanTypes().false"
+                 (click)="filter.active = filter.getBooleanTypes().false"/>
+        </label>
+      </div>
+    </div>
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Адміністратор заявок:</div>
+      <div class="filter-section-param-value">
+        <label class="label container-display-inline radio-select">
+          <span>Не задано:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="rabiesVaccination"
+                 [checked]="filter.requestsCRUD === filter.getBooleanTypes().notUse"
+                 (click)="filter.requestsCRUD = filter.getBooleanTypes().notUse"/>
+        </label>
+        <label class="label container-display-inline radio-select">
+          <span>Так:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="rabiesVaccination"
+                 [checked]="filter.requestsCRUD === filter.getBooleanTypes().true"
+                 (click)="filter.requestsCRUD = filter.getBooleanTypes().true"/>
+        </label>
+
+        <label class="label container-display-inline radio-select">
+          <span>Ні:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="rabiesVaccination"
+                 [checked]="filter.requestsCRUD === filter.getBooleanTypes().false"
+                 (click)="filter.requestsCRUD = filter.getBooleanTypes().false"/>
+        </label>
+      </div>
+    </div>
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Адміністратор тварин:</div>
+      <div class="filter-section-param-value">
+        <label class="label container-display-inline radio-select">
+          <span>Не задано:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="complexVaccination"
+                 [checked]="filter.animalsCRUD === filter.getBooleanTypes().notUse"
+                 (click)="filter.animalsCRUD = filter.getBooleanTypes().notUse"/>
+        </label>
+        <label class="label container-display-inline radio-select">
+          <span>Так:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="complexVaccination"
+                 [checked]="filter.animalsCRUD === filter.getBooleanTypes().true"
+                 (click)="filter.animalsCRUD = filter.getBooleanTypes().true"/>
+        </label>
+
+        <label class="label container-display-inline radio-select">
+          <span>Ні:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="complexVaccination"
+                 [checked]="filter.animalsCRUD === filter.getBooleanTypes().false"
+                 (click)="filter.animalsCRUD = filter.getBooleanTypes().false"/>
+        </label>
+      </div>
+    </div>
+    <div class="filter-section-param">
+      <div class="label filter-section-param-key">Адміністратор користувачів:</div>
+      <div class="filter-section-param-value">
+        <label class="label container-display-inline radio-select">
+          <span>Не задано:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="animalHasFamily"
+                 [checked]="filter.usersCRUD === filter.getBooleanTypes().notUse"
+                 (click)="filter.usersCRUD = filter.getBooleanTypes().notUse"/>
+        </label>
+        <label class="label container-display-inline radio-select">
+          <span>Так:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="animalHasFamily"
+                 [checked]="filter.usersCRUD === filter.getBooleanTypes().true"
+                 (click)="filter.usersCRUD = filter.getBooleanTypes().true"/>
+        </label>
+
+        <label class="label container-display-inline radio-select">
+          <span>Ні:</span>
+          <input type="radio"
+                 class="input filter-param-input"
+                 name="animalHasFamily"
+                 [checked]="filter.usersCRUD === filter.getBooleanTypes().false"
+                 (click)="filter.usersCRUD = filter.getBooleanTypes().false"/>
+        </label>
+      </div>
+    </div>
+    <div class="filter-buttons-container">
+      <button class="button" (click)="getUsers()">Застосувати</button>
+      <button class="button" (click)="resetFilter()">Зкинути</button>
+    </div>
+  </section>
 
   <table class="table">
     <tr class="table-header">
-      <th>Код</th>
-      <th>Ім'я та прізвище</th>
-      <th>Email</th>
-      <th>Тел1</th>
-      <th>Тел2</th>
-      <th><p class="rotate--ninety-deg">Діючий</p></th>
-      <th><p class="rotate--ninety-deg">Заявки</p></th>
-      <th><p class="rotate--ninety-deg">Тварини</p></th>
-      <th><p class="rotate--ninety-deg">Корист.</p></th>
-      <th>Дата зміни</th>
+      <th>
+        <div class="vertical--center cursor--pointer"
+             [class.selected]="sorting.column === sorting.getTypes().code"
+             (click)="setSorting(sorting.getTypes().code)">
+          <span>Код</span>
+          <app-sorting *ngIf="sorting.column === sorting.getTypes().code"
+                       [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </div>
+      </th>
+      <th>
+        <div class="vertical--center cursor--pointer"
+             [class.selected]="sorting.column === sorting.getTypes().name"
+             (click)="setSorting(sorting.getTypes().name)">
+          <span>Ім'я та прізвище</span>
+          <app-sorting *ngIf="sorting.column === sorting.getTypes().name"
+                       [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </div>
+      </th>
+      <th>
+        <div class="vertical--center cursor--pointer"
+             [class.selected]="sorting.column === sorting.getTypes().email"
+             (click)="setSorting(sorting.getTypes().email)">
+          <span>Email</span>
+          <app-sorting *ngIf="sorting.column === sorting.getTypes().email"
+                       [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </div>
+      </th>
+      <th>
+        <div class="vertical--center cursor--pointer"
+             [class.selected]="sorting.column === sorting.getTypes().phone1"
+             (click)="setSorting(sorting.getTypes().phone1)">
+          <span>Тел1</span>
+          <app-sorting *ngIf="sorting.column === sorting.getTypes().phone1"
+                       [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </div>
+      </th>
+      <th>
+        <div class="vertical--center cursor--pointer"
+             [class.selected]="sorting.column === sorting.getTypes().phone2"
+             (click)="setSorting(sorting.getTypes().phone2)">
+          <span>Тел2</span>
+          <app-sorting *ngIf="sorting.column === sorting.getTypes().phone2"
+                       [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </div>
+      </th>
+      <th>
+        <div class="vertical--center cursor--pointer"
+             [class.selected]="sorting.column === sorting.getTypes().active"
+             (click)="setSorting(sorting.getTypes().active)">
+          <span class="rotate--ninety-deg">Діючий</span>
+          <app-sorting *ngIf="sorting.column === sorting.getTypes().active"
+                       [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </div>
+      </th>
+      <th>
+        <div class="vertical--center cursor--pointer"
+             [class.selected]="sorting.column === sorting.getTypes().requestsCRUD"
+             (click)="setSorting(sorting.getTypes().requestsCRUD)">
+          <span class="rotate--ninety-deg">Заявки</span>
+          <app-sorting *ngIf="sorting.column === sorting.getTypes().requestsCRUD"
+                       [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </div>
+      </th>
+      <th>
+        <div class="vertical--center cursor--pointer"
+             [class.selected]="sorting.column === sorting.getTypes().animalsCRUD"
+             (click)="setSorting(sorting.getTypes().animalsCRUD)">
+          <span class="rotate--ninety-deg">Тварини</span>
+          <app-sorting *ngIf="sorting.column === sorting.getTypes().animalsCRUD"
+                       [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </div>
+      </th>
+      <th>
+        <div class="vertical--center cursor--pointer"
+             [class.selected]="sorting.column === sorting.getTypes().usersCRUD"
+             (click)="setSorting(sorting.getTypes().usersCRUD)">
+          <span class="rotate--ninety-deg">Корист.</span>
+          <app-sorting *ngIf="sorting.column === sorting.getTypes().usersCRUD"
+                       [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </div>
+      </th>
+      <th>
+        <div class="vertical--center cursor--pointer"
+             [class.selected]="sorting.column === sorting.getTypes().changeDate"
+             (click)="setSorting(sorting.getTypes().changeDate)">
+          <span>Дата зміни</span>
+          <app-sorting *ngIf="sorting.column === sorting.getTypes().changeDate"
+                       [sortingDesc]="sorting.direction === sorting.getDirections().desc"></app-sorting>
+        </div>
+      </th>
       <th></th>
     </tr>
 
