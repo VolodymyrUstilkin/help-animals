@@ -26,8 +26,6 @@ class NavMenuItem implements INavMenuItem {
   ]
 })
 
-
-
 export class NavigationUiComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy{
 
   openCancelFavorite = false;
@@ -42,7 +40,7 @@ export class NavigationUiComponent implements OnInit, AfterViewInit, AfterViewCh
 
   subscription: Subscription;
 
-  constructor(private userAuthService: UserAuthService, private cdRef: ChangeDetectorRef) {
+  constructor(private userAuthService: UserAuthService, private cdRef: ChangeDetectorRef, private elRef: ElementRef) {
     this.subscription = userAuthService.userUpdatedEvent.subscribe(() => {
       this.createMenu();
     });
@@ -165,7 +163,7 @@ export class NavigationUiComponent implements OnInit, AfterViewInit, AfterViewCh
       });
     } else {
       this.active = false;
-      const burger = document.querySelector('.menu__icon');
+      const burger = this.elRef.nativeElement.parentNode.querySelector('.menu__icon');
       burger?.classList.remove('_active');
     }
   }

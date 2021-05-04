@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { fromEvent, Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { fromEvent, Subscription, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { PasswordRecoveryService } from 'src/app/core/services/password-recovery/password-recovery.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -11,21 +14,26 @@ import { fromEvent, Subscription } from 'rxjs';
 export class ResetPasswordComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('form') form!: HTMLFormElement;
 
-
   resetPasswordForm: FormGroup = this.formBuilder.group({
-    password: ['', [Validators.required]],
-    repeatPassword: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    repeatPassword: ['', [Validators.required, Validators.minLength(8)]],
   });
 
 
   private subscription: Subscription = new Subscription();
-  private statePassword = '';
-  private stateRepeatPassword = '';
-  public message = '';
+  private statePassword = 'password';
+  private stateRepeatPassword = 'repeatPassword';
+  public message = '1';
+  private tokenForChangePassword = '';
 
-  constructor(private httpClient: HttpClient,
+  constructor(private passwordRecoveryService: PasswordRecoveryService,
               private formBuilder: FormBuilder,
-    ) {}
+              private route: ActivatedRoute,
+    ) {
+      this.route.params.subscribe((params) => {
+        this.tokenForChangePassword = params.token;
+      });
+    }
 
   ngOnInit(): void {
     this.subscription.add(this.resetPasswordForm.controls.password.statusChanges.subscribe((status) => {
@@ -47,10 +55,18 @@ export class ResetPasswordComponent implements OnInit, AfterViewInit, OnDestroy 
     this.subscription.add(fromEvent<Event>(this.form.nativeElement, 'submit').subscribe((e) => {
       e.preventDefault();
       if (this.validField() && this.exactDataField()) {
-        console.log('valid');
+        this.passwordRecoveryService.resetPassword(this.statePassword, this.tokenForChangePassword).pipe(
+          catchError((error) => {
+            this.message = 'error';
+            return throwError(error);
+          }),
+        ).subscribe((response) => {
+          console.log(response);
+          this.message = 'success';
+        });
         this.resetForm();
       } else if (this.validField() && !this.exactDataField()) {
-          this.message = 'Паролi не спiвпадають спробуйте ще раз!';
+          this.message = 'error';
           console.log(this.message);
       }
     }));
@@ -61,17 +77,38 @@ export class ResetPasswordComponent implements OnInit, AfterViewInit, OnDestroy 
     return this.resetPasswordForm.controls.password.valid && this.resetPasswordForm.controls.repeatPassword.valid;
   }
 
-  private exactDataField(): boolean {
-    return this.resetPasswordForm.controls.password.value === this.resetPasswordForm.controls.repeatPassword.value;
+  exactDataField(): boolean {
+    return this.statePassword  === this.stateRepeatPassword;
   }
 
-  public submit(event: Event): void {
+  submit(event: Event): void {
     console.log(event);
-
   }
 
   private resetForm(): void {
     this.resetPasswordForm.reset();
+  }
+
+  changeAppearance(event: Event, input: HTMLInputElement): void {
+    const element = (event.target as SVGImageElement);
+    const attributes = (event.target as HTMLOrSVGScriptElement).dataset.svg;
+    const basePath = './../../../assets/images/sprire.svg#';
+    const nameOfFirstSVG = 'view';
+    const nameOfSecondSVG = 'view-close';
+    const svg = element.children[0].children[0] as SVGImageElement;
+
+    switch (attributes) {
+      case nameOfFirstSVG:
+        svg.href.baseVal = `${basePath}${nameOfSecondSVG}`;
+        element.dataset.svg = nameOfSecondSVG;
+        input.setAttribute('type', 'text');
+        break;
+      case nameOfSecondSVG:
+        svg.href.baseVal = `${basePath}${nameOfFirstSVG}`;
+        element.dataset.svg = nameOfFirstSVG;
+        input.setAttribute('type', 'password');
+        break;
+    }
   }
 
   ngOnDestroy(): void {

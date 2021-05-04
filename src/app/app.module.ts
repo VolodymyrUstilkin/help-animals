@@ -26,9 +26,9 @@ import {services} from './core/services';
   providers: [
     ...services,
     {
-      provide: HTTP_INTERCEPTORS, // Injection Token
-      useClass: AuthInterceptor, // Interceptor class
-      multi: true, // we added array
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
     }
   ],
   bootstrap: [AppComponent]

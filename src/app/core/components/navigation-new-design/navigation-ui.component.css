@@ -23,16 +23,37 @@
 .menu__link .menu__link-image{
   padding-right: 5px;
   pointer-events: none;
+  transition: all .5s 0s ease;
+  transform-origin: center;
 }
 
 .menu__link .menu__link-text{
   padding-right: 5px;
   pointer-events: none;
-  text-align: center;
+  text-align: left;
+  transition: all .5s 0s ease;
 }
 
-.menu__link.active,.menu__link:hover{
+.menu__link.active{
   background-color: #2f2e41;
+}
+
+.menu__link.active:hover .menu__link-image{
+  filter: invert(64%) sepia(44%) saturate(5060%) hue-rotate(30deg) brightness(150%) contrast(105%);
+}
+
+.menu__link.active:hover .menu__link-text{
+  color: #FFF;
+}
+
+.menu__link:hover .menu__link-image{
+  transform: rotate(-360deg) scale(.9);
+  filter: invert(15%) sepia(22%) saturate(796%) hue-rotate(204deg) brightness(25%) contrast(89%);
+}
+
+.menu__link:hover .menu__link-text{
+  color: #2f2e41;
+  text-shadow: 0px 0px 1px #FFF;
 }
 
 .menu__sub-list {

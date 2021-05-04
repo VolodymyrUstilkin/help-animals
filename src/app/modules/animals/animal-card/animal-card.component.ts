@@ -10,6 +10,7 @@ import {IAnimalInfo} from '../animal-list/models/ianimal-info';
 export class AnimalCardComponent  implements AfterViewInit, OnDestroy{
 
   active = true;
+  loadImages = true;
   private subscription: Subscription = new Subscription();
   @Input() animalInfo?: IAnimalInfo;
   @ViewChildren('forward') buttonsForward!: QueryList<ElementRef<HTMLDivElement>>;
@@ -43,6 +44,10 @@ export class AnimalCardComponent  implements AfterViewInit, OnDestroy{
         });
       });
     }));
+  }
+
+  deleteSpinner(): void {
+    this.loadImages = !this.loadImages;
   }
 
   ngOnDestroy(): void {

@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, AfterContentInit {
     this.asideNeedShow = this.elRef.nativeElement.firstElementChild.offsetWidth > 900;
   }
 
-  getRouteAnimationState(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  getRouteAnimationState(outlet: RouterOutlet): void {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 }

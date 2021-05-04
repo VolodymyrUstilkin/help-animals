@@ -1,16 +1,21 @@
 <div class="card" *ngIf="animalInfo">
   <div class="card__front" [ngClass]="{'active': active}">
     <figure class="picture__box">
-      <img class="picture__box-image" src="{{animalInfo.imgUrl}}" alt="PHOTO">
+      <img class="picture__box-image" src="{{animalInfo.imgUrl}}" alt="PHOTO" (load)="deleteSpinner()">
+      <div class="picture__spinner" *ngIf="loadImages">
+        <svg>
+          <circle cx="70" cy="70" r="70"></circle>
+        </svg>
+      </div>
     </figure>
-    <div class="card__front-button" #forward>
+    <div class="card__button" #forward>
       <div class="arrow"></div>
       <div class="arrow"></div>
       <div class="arrow"></div>
     </div>
   </div>
   <div class="card__back" [ngClass]="{'active': !active}">
-    <div class="card__front-button" #back>
+    <div class="card__button" #back>
       <div class="arrow"></div>
       <div class="arrow"></div>
       <div class="arrow"></div>

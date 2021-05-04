@@ -13,7 +13,7 @@ import { TokenAuthService } from 'src/app/core/services/token-auth-service/token
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private tokenAuthService : TokenAuthService) {}
+  constructor(private tokenAuthService: TokenAuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return of(this.tokenAuthService.getToken()).pipe(
@@ -25,14 +25,14 @@ export class AuthInterceptor implements HttpInterceptor {
         }) : request;
         return next.handle(authRequest).pipe(
           catchError( error => {
-            if(error instanceof HttpErrorResponse){
+            if (error instanceof HttpErrorResponse){
               if (error.status === 401) {
                 console.log('Redirect to login page');
                 return EMPTY;
               }
             }
-            throw error
-          }))
+            throw error;
+          }));
       }),
     );
   }

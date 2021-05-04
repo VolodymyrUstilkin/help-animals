@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { fromEvent, Subscription } from 'rxjs';
+import { fromEvent, Observable, Subscription, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { PasswordRecoveryService } from 'src/app/core/services/password-recovery/password-recovery.service';
 
 @Component({
   selector: 'app-password-recovery',
@@ -12,14 +13,12 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit, OnDestr
 
   @ViewChild('form') form!: HTMLFormElement;
 
-
-  public responseFromServer = false;
-  public successMessage = false;
+  public responseFromServer = '';
   private subscription: Subscription = new Subscription();
   public emailControl!: FormControl;
   private stateEmail = '';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private passwordRecoveryService: PasswordRecoveryService) {}
 
   ngOnInit(): void {
     this.emailControl = new FormControl(this.stateEmail, [Validators.required, Validators.email]);
@@ -36,8 +35,15 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit, OnDestr
       e.preventDefault();
 
       if (this.emailControl.valid) {
-        // this.httpClient.post()
-        console.log('valid');
+        this.passwordRecoveryService.forogotPassword(this.stateEmail).pipe(
+          catchError((error) => {
+            this.responseFromServer = 'error';
+            return throwError(error);
+          })
+        ).subscribe((response) => {
+          console.log(response);
+          this.responseFromServer = 'success';
+        });
         this.resetForm();
       }
     }));
