@@ -2,10 +2,10 @@ version: '3.8'
 services:
   fe:
     container_name: help_animals_fe
-    command: bash -c "npm install && npm run buildProduction && node ./server/server.js 80"
+    command: bash -c "npm install && npm run buildProduction && node ./server/server.js 8080"
 
     build: .
     ports:
-      - 8080:80
+      - 8080:8080
     volumes:
       - .:/home/app:rw
