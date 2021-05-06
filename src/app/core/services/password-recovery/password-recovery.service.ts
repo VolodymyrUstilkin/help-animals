@@ -14,19 +14,17 @@ export class PasswordRecoveryService {
 
   constructor(private httpClient: HttpClient) {}
 
-  forogotPassword(email: string): Observable<any>  {
-    // const options = {
-    //   params: {
-    //     email,
-    //   },
-    // };
-    // return this.httpClient.post<any>(this.FORGOT_URL, options);
+  forogotPassword(email: string): Observable<any>{
+    const options = {
+      params: {
+        email,
+      },
+    };
 
-    const params = new HttpParams().append('email', email);
-    return this.httpClient.post<any>(this.FORGOT_URL, '', {params});
+    return this.httpClient.post<any>(this.FORGOT_URL, '', options);
   }
 
-  resetPassword(password: string, token: string): Observable<any>  {
+  resetPassword(password: string, token: string): Observable<any>{
     const options = {
       params: {
         password,
@@ -34,6 +32,6 @@ export class PasswordRecoveryService {
       },
     };
 
-    return this.httpClient.post<any>(this.RESET_URL, options);
+    return this.httpClient.post<any>(this.RESET_URL, '', options);
   }
 }

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { fromEvent, Subscription, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { fromEvent, of, Subscription, throwError, timer } from 'rxjs';
+import { catchError, delay, take } from 'rxjs/operators';
 import { PasswordRecoveryService } from 'src/app/core/services/password-recovery/password-recovery.service';
 
 @Component({
@@ -23,12 +23,13 @@ export class ResetPasswordComponent implements OnInit, AfterViewInit, OnDestroy 
   private subscription: Subscription = new Subscription();
   private statePassword = 'password';
   private stateRepeatPassword = 'repeatPassword';
-  public message = '1';
+  public message = 'initialValue';
   private tokenForChangePassword = '';
 
   constructor(private passwordRecoveryService: PasswordRecoveryService,
               private formBuilder: FormBuilder,
               private route: ActivatedRoute,
+              private router: Router,
     ) {
       this.route.params.subscribe((params) => {
         this.tokenForChangePassword = params.token;
@@ -60,14 +61,12 @@ export class ResetPasswordComponent implements OnInit, AfterViewInit, OnDestroy 
             this.message = 'error';
             return throwError(error);
           }),
-        ).subscribe((response) => {
-          console.log(response);
+        ).subscribe(() => {
           this.message = 'success';
+          this.subscription.add(of(true).pipe(delay(5000))
+          .subscribe(() => this.router.navigate(['login'])));
         });
         this.resetForm();
-      } else if (this.validField() && !this.exactDataField()) {
-          this.message = 'error';
-          console.log(this.message);
       }
     }));
 

@@ -60,7 +60,7 @@
 .card .card__front .picture__box:before {
   position: absolute;
 	top: 0;
-	left: -75%;
+	left: -78%;
 	z-index: 2;
 	display: block;
 	content: '';

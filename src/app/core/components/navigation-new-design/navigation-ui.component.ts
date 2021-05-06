@@ -180,7 +180,7 @@ export class NavigationUiComponent implements OnInit, AfterViewInit, AfterViewCh
     );
     const scroll = this.widthScrollBar();
 
-    return width + scroll <= 767;
+    return width + scroll <= 930;
   }
 
   private widthScrollBar(): number{
