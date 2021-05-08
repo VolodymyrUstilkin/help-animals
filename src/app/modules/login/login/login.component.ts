@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup = this.formBuilder.group({
     login: ['', [Validators.required]],
     password: ['', [Validators.required]],
-    remember: [false]
+    remember: false
   });
 
   constructor(
@@ -48,10 +48,14 @@ export class LoginComponent implements OnInit {
       return;
     }
     const headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
-    const reqBody: string = JSON.stringify({login: this.loginForm.value.login, password: this.loginForm.value.password});
+    const reqBody: string = JSON.stringify({
+      login: this.loginForm.value.login,
+      password: this.loginForm.value.password,
+      remember_me: this.loginForm.value.remember
+    });
     this.httpClient.post<{ token: string }>(AUTHENTICATION_URL, reqBody, {headers})
       .subscribe((resp: any) => {
-        this.tokenAuthService.setToken(resp.token);
+        this.tokenAuthService.setToken(resp.token, this.loginForm.value.remember);
         this.router.navigate(['']);
       }, error => {
         const errCode = error.error.error.error_code;

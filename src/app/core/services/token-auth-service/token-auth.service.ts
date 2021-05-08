@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
+import {CookieService} from 'ngx-cookie-service';
 
 const STORAGE_TOKEN_NAME = 'authToken';
 
@@ -10,15 +11,19 @@ export class TokenAuthService {
   private token: string;
   public tokenUpdatedEvent: BehaviorSubject<string>;
 
-  constructor() {
-    this.token = localStorage.getItem(STORAGE_TOKEN_NAME) || '';
+  constructor(private cookieService: CookieService) {
+    this.token = cookieService.get(STORAGE_TOKEN_NAME);
     this.tokenUpdatedEvent = new BehaviorSubject(this.token);
   }
 
-  setToken(token: string): void {
+  setToken(token: string, remember: boolean): void {
     if (token) {
       this.token = token;
-      localStorage.setItem(STORAGE_TOKEN_NAME, this.token);
+      if (remember) {
+        this.cookieService.set(STORAGE_TOKEN_NAME, this.token, 28);
+      } else {
+        this.cookieService.set(STORAGE_TOKEN_NAME, this.token);
+      }
       this.tokenUpdatedEvent.next(this.token);
     }
   }
@@ -29,6 +34,6 @@ export class TokenAuthService {
 
   removeToken(): void {
     this.token = '';
-    localStorage.removeItem(STORAGE_TOKEN_NAME);
+    this.cookieService.delete(STORAGE_TOKEN_NAME);
   }
 }

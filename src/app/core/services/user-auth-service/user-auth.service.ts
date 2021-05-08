@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {environment} from '../../../../environments';
@@ -32,19 +32,26 @@ const userGuest = new UserGuest();
   providedIn: 'root'
 })
 
-export class UserAuthService {
+export class UserAuthService implements OnDestroy {
   private currentUser: IUserAuth = userGuest;
-  public userUpdatedEvent: BehaviorSubject<IUserAuth>;
-  public tokenUpdatedEventSubscription: Subscription;
+  public userUpdatedEvent: BehaviorSubject<IUserAuth> = new BehaviorSubject(this.currentUser);
+  public tokenUpdatedEventSubscription: Subscription = this.tokenAuthService.tokenUpdatedEvent.subscribe(() => this.loadUserFromServer());
 
-  constructor(private httpClient: HttpClient, private router: Router, private tokenAuthService: TokenAuthService) {
-    const user = localStorage.getItem(STORAGE_USER_NAME);
-    if (user) {
-       this.currentUser = JSON.parse(atob(user));
+  constructor(private httpClient: HttpClient,
+              private router: Router,
+              private tokenAuthService: TokenAuthService) {
+    if (!!tokenAuthService.getToken()) {
+      this.setUser(null);
     }
 
-    this.userUpdatedEvent = new BehaviorSubject(this.currentUser);
-    this.tokenUpdatedEventSubscription = tokenAuthService.tokenUpdatedEvent.subscribe(() => this.loadUserFromServer());
+    const user = localStorage.getItem(STORAGE_USER_NAME);
+    if (user) {
+      this.currentUser = JSON.parse(atob(user));
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.tokenUpdatedEventSubscription.unsubscribe();
   }
 
   public isAuthorized(): boolean {
@@ -56,7 +63,7 @@ export class UserAuthService {
   }
 
   public setUser(user: IUserAuth | null): void {
-    if (user) {
+    if (user && this.tokenAuthService.getToken()) {
       this.currentUser = user;
       localStorage.setItem(STORAGE_USER_NAME, btoa(JSON.stringify(this.currentUser)));
     } else {
