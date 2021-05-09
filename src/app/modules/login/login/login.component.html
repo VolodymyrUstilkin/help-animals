@@ -21,10 +21,6 @@
     <div class="error-message" *ngIf="loginForm.controls.password.invalid">Required</div>
 
     <div class="remember-container new-line-padding">
-      <!-- <div class="remember-container-left">
-        <label for="remember" class="label">Запам'ятати:</label>
-        <input id="remember" type="checkbox" class="input" name="remember" formControlName="remember">
-      </div> -->
       <app-checkbox formControlName="remember" [text]="'Запам`ятати:'"></app-checkbox>
       <div class="remember-container-right">
         <a class="remember-container-link" routerLink="/passwordrecovery">Забули пароль?</a>
@@ -35,5 +31,4 @@
       <button type="button" class="button submit-button" (click)="submitLogin()" [disabled]="loginForm.invalid">Увійти</button>
     </div>
   </form>
-  <a class="active-admin-api-link" href="{{activeAdminApiUrl}}">Login for admin</a>
 </div>
