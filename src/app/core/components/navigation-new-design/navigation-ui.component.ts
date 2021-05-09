@@ -132,7 +132,7 @@ export class NavigationUiComponent implements OnInit, AfterViewInit, AfterViewCh
         if (user.permissionForAddEditAndRemoveAnimals) {
           this.adminMenuItems.push(new NavMenuItem('Керування обліком тварин', BASE_URL + '/admin/animals/list'));
         }
-        this.adminMenuItems.push(new NavMenuItem('Користувачi', BASE_URL + '/admin/users'));
+        // this.adminMenuItems.push(new NavMenuItem('Користувачi', BASE_URL + '/admin/users'));
         this.adminMenuItems.push(new NavMenuItem('Вихiд', BASE_URL + 'login'));
         break;
       case 'mobile':
@@ -143,7 +143,7 @@ export class NavigationUiComponent implements OnInit, AfterViewInit, AfterViewCh
           this.publicMenuItems.push(new NavMenuItem('Керування обліком тварин', BASE_URL + '/admin/animals/list'));
         }
         if (this.isAuth()) {
-          this.publicMenuItems.push(new NavMenuItem('Користувачi', BASE_URL + '/admin/users'));
+          // this.publicMenuItems.push(new NavMenuItem('Користувачi', BASE_URL + '/admin/users'));
           this.publicMenuItems.push(new NavMenuItem('Вихiд', BASE_URL + 'login'));
         }
         break;

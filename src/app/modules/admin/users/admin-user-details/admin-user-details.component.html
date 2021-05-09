@@ -9,14 +9,14 @@
            readonly="readonly"/>
   </div>
 
-  <div class="admin-details-form-field-container">
-    <label class="label" for="login">Логін:</label>
-    <input class="input admin-details-form-field-input"
-           id="login"
-           value="{{userDetails.login}}"
-           readonly="readonly"
-           type="text"/>
-  </div>
+  <!--  <div class="admin-details-form-field-container">-->
+  <!--    <label class="label" for="login">Логін:</label>-->
+  <!--    <input class="input admin-details-form-field-input"-->
+  <!--           id="login"-->
+  <!--           value="{{userDetails.login}}"-->
+  <!--           readonly="readonly"-->
+  <!--           type="text"/>-->
+  <!--  </div>-->
 
   <div class="admin-details-form-field-container">
     <label class="label" for="name">Ім'я та прізвище:</label>
@@ -66,9 +66,10 @@
     <label
       class="label colored-font">{{userDetails.permissionForAddEditAndRemoveAnimals ? '&#10004;' : '&#10008;'}}</label>
 
+    <!--
     <label class="label font-weight--default">Створення/видалення/редагування користувачів:</label>
-    <label
-      class="label colored-font">{{userDetails.permissionForAccessToActiveAdmin ? '&#10004;' : '&#10008;'}}</label>
+    <label class="label colored-font">{{userDetails.permissionForAccessToActiveAdmin ? '&#10004;' : '&#10008;'}}</label>
+    -->
   </section>
 
   <div class="admin-details-form-field-container">

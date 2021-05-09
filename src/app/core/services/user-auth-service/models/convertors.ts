@@ -6,7 +6,7 @@ export class Convertors {
     return {
       id: response.id,
       isActive: response.is_active,
-      permissionForAccessToActiveAdmin: response.activeadmin,
+      // permissionForAccessToActiveAdmin: response.activeadmin,
       permissionForAddEditAndRemoveAnimals: response.animals_crud,
       permissionForCreateAndCloseAnimalRequests: response.requests_crud
     };
