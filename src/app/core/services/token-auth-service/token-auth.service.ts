@@ -19,6 +19,7 @@ export class TokenAuthService {
   setToken(token: string, remember: boolean): void {
     if (token) {
       this.token = token;
+      this.cookieService.delete(STORAGE_TOKEN_NAME);
       if (remember) {
         this.cookieService.set(STORAGE_TOKEN_NAME, this.token, 28);
       } else {

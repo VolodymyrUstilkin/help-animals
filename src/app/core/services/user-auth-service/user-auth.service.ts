@@ -40,9 +40,10 @@ export class UserAuthService implements OnDestroy {
   constructor(private httpClient: HttpClient,
               private router: Router,
               private tokenAuthService: TokenAuthService) {
-    if (!!tokenAuthService.getToken()) {
+    if (!tokenAuthService.getToken()) {
       this.setUser(null);
     }
+
 
     const user = localStorage.getItem(STORAGE_USER_NAME);
     if (user) {
