@@ -1,13 +1,13 @@
 export interface IAdminUserDetailsGetResponse {
-  id: string;
-  login: string;
+  // id: string;
+  // login: string;
   name: string;
   phone1: string;
   phone2: string;
   email: string;
 
   is_active: boolean;
-  activeadmin: boolean;
+  // activeadmin: boolean;
   animals_crud: boolean;
   requests_crud: boolean;
 

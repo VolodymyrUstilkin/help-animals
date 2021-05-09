@@ -9,9 +9,9 @@ import {convertTimestampToLocalDateTime} from '../../../shared/models/convert-ti
 
 class AdminUserDetails implements IAdminUserDetails {
   email = '';
-  id = '';
+  // id = '';
   isActive = false;
-  login = '';
+  // login = '';
   name = '';
   permissionForAddEditAndRemoveAnimals = false;
   // permissionForAccessToActiveAdmin = false;
@@ -49,8 +49,8 @@ export class AdminUserDetailsComponent implements AfterViewInit {
     this.httpClient.get<IAdminUserDetailsGetResponse>(`${API_ADMIN_USERS_URL}/${id}`)
       .subscribe((res) => {
         this.userDetails = {
-          id: res.id.toString(),
-          login: res.login,
+          // id: res.id.toString(),
+          // login: res.login,
           name: res.name,
           phone1: res.phone1,
           phone2: res.phone2,

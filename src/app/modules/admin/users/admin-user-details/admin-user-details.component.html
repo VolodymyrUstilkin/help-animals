@@ -1,13 +1,13 @@
 <div class="admin-details">
   <h4 class="caption">Перегляд користувача:</h4>
 
-  <div class="admin-details-form-field-container">
-    <label class="label" for="id">Код:</label>
-    <input class="input admin-details-form-field-input"
-           id="id"
-           value="{{userDetails.id}}"
-           readonly="readonly"/>
-  </div>
+  <!--  <div class="admin-details-form-field-container">-->
+  <!--    <label class="label" for="id">Код:</label>-->
+  <!--    <input class="input admin-details-form-field-input"-->
+  <!--           id="id"-->
+  <!--           value="{{userDetails.id}}"-->
+  <!--           readonly="readonly"/>-->
+  <!--  </div>-->
 
   <!--  <div class="admin-details-form-field-container">-->
   <!--    <label class="label" for="login">Логін:</label>-->
@@ -38,18 +38,21 @@
 
   <div class="admin-details-form-field-container">
     <label class="label">Телефони:</label>
-    <label for="phone1"></label>
-    <input class="input admin-details-form-field-input"
+    <label for="phone1" *ngIf="userDetails.phone1"></label>
+    <input *ngIf="userDetails.phone1"
+           class="input admin-details-form-field-input"
            id="phone1"
            value="{{userDetails.phone1}}"
            readonly="readonly"
            type="text"/>
-    <label for="phone2"></label>
-    <input class="input admin-details-form-field-input"
+    <label for="phone2" *ngIf="userDetails.phone2"></label>
+    <input *ngIf="userDetails.phone2"
+           class="input admin-details-form-field-input"
            id="phone2"
            value="{{userDetails.phone2}}"
            readonly="readonly"
            type="text"/>
+    <label class="input" *ngIf="!userDetails.phone1 && !userDetails.phone2">Не вказано</label>
   </div>
 
   <p class="label admin-details-form-field-container">Керування правами доступа:</p>
