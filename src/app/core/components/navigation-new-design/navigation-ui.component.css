@@ -132,7 +132,7 @@
   transform: rotate(-180deg);
 }
 
-@media screen and (max-width: 930px) {
+@media screen and (max-width: 960px) {
   .menu__body {
     position: fixed;
     top: 0;

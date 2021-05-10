@@ -1,0 +1,289 @@
+.wrapper{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content auto;
+  justify-items: center;
+  align-items: center;
+}
+
+.card {
+  position: relative;
+  width: 508px;
+  height: 314px;
+  transform-style: preserve-3d;
+  perspective: 500px;
+  cursor: pointer;
+}
+
+.card .face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 5px 20px 20px rgba(255,140,0,0.5);
+  border-radius: 15px;
+  background: rgba(47, 46, 65, 1);
+  backdrop-filter: blur(10px);
+  transform-style: preserve-3d;
+  transition: all 1s ease;
+  backface-visibility: hidden;
+}
+
+.card:hover .face.front {
+  transform: rotateY(180deg);
+}
+
+.card .face.back {
+  transform: rotateY(180deg);
+}
+
+.card:hover .face.back {
+  transform: rotateY(360deg);
+}
+
+.card .face.front::before {
+  content: "";
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  background: #F79E1B  ;
+  border-radius: 50%;
+  opacity: .8;
+}
+
+.card .face.front::after {
+  content: "";
+  position: absolute;
+  bottom: 40px;
+  right: 80px;
+  width: 60px;
+  height: 60px;
+  background: #EB001B;
+  border-radius: 50%;
+  opacity: .8;
+}
+
+.card .face.front .debit {
+  position: absolute;
+  left: 40px;
+  top: 30px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.card .face.front .bank {
+  position: absolute;
+  right: 40px;
+  top: 25px;
+  color: #fff;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 24px;
+}
+
+.card .face.front .chip {
+  position: absolute;
+  top: 100px;
+  left: 50px;
+  max-width: 64px;
+}
+
+.card .face.front .number {
+  position: absolute;
+  bottom: 130px;
+  left: 40px;
+  color: #FF8C00;
+  font-weight: 500;
+  letter-spacing: 6px;
+  font-size: 24px;
+  text-shadow: 0 1px 1px #FFF;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.card .face.front .valid {
+  position: absolute;
+  bottom: 90px;
+  right: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFF;
+  font-weight: 300;
+  line-height: 1em;
+  text-align: right;
+}
+
+.card .face.front .valid span{
+  margin-left: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.card .face.front .cardHolder{
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  color: #FFF;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.card .face.back .blackbar{
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  height: 60px;
+  background: #000;
+}
+
+.card .face.back .ccvtext{
+  position: absolute;
+  top: 120px;
+  left: 30px;
+}
+
+
+.card .face.back .ccvtext h5{
+  color: #fff;
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.card .face.back .ccvtext .whiteBar{
+  position: relative ;
+  width: 400px;
+  height: 40px;
+  background: #fff;
+  margin-top: 5px;
+}
+
+.card .face.back .ccvtext .ccv {
+  position: relative;
+  background: #ccc;
+  color: #000;
+  width: 50px;
+  height: 30px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -35px;
+  left: 395px;
+}
+
+.card .face.back .text {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.4em;
+  font-weight: 300;
+}
+
+.wrapper .content{
+  padding-top: 25px;
+}
+
+
+@media screen and (max-width: 560px) {
+  .card {
+    width: calc(300px + (508 - 300) * ((100vw - 320px) / (1200 - 320)));
+    height: calc(200px + (314 - 200) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.front::before {
+    bottom: calc(30px + (40 - 30) * ((100vw - 320px) / (1200 - 320)));
+    right: calc(30px + (40 - 30) * ((100vw - 320px) / (1200 - 320)));
+    width: calc(30px + (60 - 30) * ((100vw - 320px) / (1200 - 320)));
+    height: calc(30px + (60 - 30) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.front::after {
+    bottom: calc(30px + (40 - 30) * ((100vw - 320px) / (1200 - 320)));
+    right: calc(50px + (80 - 50) * ((100vw - 320px) / (1200 - 320)));
+    width: calc(30px + (60 - 30) * ((100vw - 320px) / (1200 - 320)));
+    height: calc(30px + (60 - 30) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.front .debit {
+    left: calc(20px + (40 - 20) * ((100vw - 320px) / (1200 - 320)));
+    font-size: calc(10px + (16 - 10) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.front .bank {
+    right: calc(20px + (40 - 20) * ((100vw - 320px) / (1200 - 320)));
+    font-size: calc(12px + (24 - 12) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.front .chip {
+    top: calc(70px + (100 - 70) * ((100vw - 320px) / (1200 - 320)));
+    left: calc(20px + (50 - 20) * ((100vw - 320px) / (1200 - 320)));
+    max-width: calc(40px + (64 - 40) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.front .number {
+    bottom: calc(70px + (130 - 70) * ((100vw - 320px) / (1200 - 320)));
+    left: calc(20px + (40 - 20) * ((100vw - 320px) / (1200 - 320)));
+    font-size: calc(16px + (24 - 16) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.front .valid {
+    bottom: calc(50px + (90 - 50) * ((100vw - 320px) / (1200 - 320)));
+    right: calc(90px + (140 - 90) * ((100vw - 320px) / (1200 - 320)));
+    font-size: calc(10px + (16 - 10) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.front .valid span{
+    font-size: calc(10px + (16 - 10) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.front .cardHolder{
+    bottom: calc(30px + (40 - 30) * ((100vw - 320px) / (1200 - 320)));
+    left: calc(20px + (40 - 20) * ((100vw - 320px) / (1200 - 320)));
+    font-size: calc(10px + (16 - 10) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.back .blackbar{
+    top: calc(30px + (40 - 30) * ((100vw - 320px) / (1200 - 320)));
+    height: calc(40px + (60 - 40) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.back .ccvtext{
+    top: calc(75px + (120 - 75) * ((100vw - 320px) / (1200 - 320)));
+    left: calc(20px + (30 - 20) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.back .ccvtext h5{
+    font-size: calc(8px + (12 - 8) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.back .ccvtext .whiteBar{
+    width: calc(240px + (400 - 240) * ((100vw - 320px) / (1200 - 320)));
+    height: calc(30px + (40 - 30) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.back .ccvtext .ccv {
+    width: calc(30px + (50 - 30) * ((100vw - 320px) / (1200 - 320)));
+    top: calc(-30px + (-35 - 30) * ((100vw - 320px) / (1200 - 320)));
+    left: calc(235px + (395 - 235) * ((100vw - 320px) / (1200 - 320)));
+  }
+
+  .card .face.back .text {
+    bottom: calc(20px + (30 - 20) * ((100vw - 320px) / (1200 - 320)));
+    left: calc(20px + (30 - 20) * ((100vw - 320px) / (1200 - 320)));
+    right: calc(20px + (30 - 20) * ((100vw - 320px) / (1200 - 320)));
+    font-size: calc(8px + (10 - 8) * ((100vw - 320px) / (1200 - 320)));
+    line-height: 1em;
+  }
+}

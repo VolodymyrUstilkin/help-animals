@@ -1,0 +1,132 @@
+.about{
+  width: 100%;
+  min-height: calc(100vh - 105px);
+  position: relative;
+}
+
+.about .about__header{
+  position: relative;
+  width: 100%;
+  text-align: center;
+  z-index: 5;
+  color:  #2f2e41;
+}
+
+.about .about__header h2{
+  font-weight: 600;
+  font-size: 2.5rem;
+  padding-bottom: 10px;
+  text-shadow: -1px 1px 1px rgba(255,140,0,.4),
+  1px -1px 0 rgba(255,140,0,.4);
+}
+
+.about .about__content{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  z-index: 5;
+  color: #2f2e41;
+}
+
+.about .about__content .about__content-box{
+  padding-right: 1rem;
+  min-width: 50%;
+}
+
+.about .about__content .about__content-box h3{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+
+}
+
+.about .about__content .about__content-box p{
+  font-size: 1rem;
+  padding: 1rem;
+  text-align: justify;
+}
+
+.about .about__content .about__image-box{
+  position: relative;
+  min-width: 50%;
+}
+
+.about .about__content .about__image-box .about__image-background {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.about .about__content .about__image-box .about__image-background video{
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.about .about__content .about__image-box .overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to left,rgb(255, 140, 0),#2F2E41);
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+
+@media screen and (max-width: 960px) {
+  .about .about__content .about__image-box{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  .about .about__content{
+    color: #FFF;
+  }
+
+  .about .about__content .about__content-box{
+    padding-right: 0;
+    min-width: 50%;
+    z-index: 1;
+  }
+
+  .about .about__content .about__image-box .overlay{
+    background: linear-gradient(to left,#2F2E41,#2F2E41);
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .about .about__content .about__image-box{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left,rgb(255, 140, 0),#2F2E41);
+  }
+
+  .about .about__content .about__image-box .about__image-background {
+    display: none;
+  }
+
+  .about .about__content .about__content-box{
+    padding-right: 0;
+    min-width: 50%;
+    z-index: 1;
+  }
+
+  .about .about__content{
+    color: #FFF;
+  }
+
+  .about .about__content .about__image-box .overlay{
+    display: none;
+  }
+}

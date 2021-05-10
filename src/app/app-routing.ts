@@ -36,11 +36,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule),
+    data: {animation: 'login'}
   },
   {
     path: 'passwordrecovery',
-    loadChildren: () => import('./modules/passwordRecovery/passwordrecovery.module').then(m => m.PasswordrecoveryModule)
+    loadChildren: () => import('./modules/passwordRecovery/passwordrecovery.module').then(m => m.PasswordrecoveryModule),
+    data: {animation: 'passwordrecovery'}
   },
   {
     path: '**',

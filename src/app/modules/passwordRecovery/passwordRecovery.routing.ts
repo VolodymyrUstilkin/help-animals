@@ -10,5 +10,6 @@ export const PasswordRecoveryRouting: Routes = [
   },
   { path: 'resetpassword/:token',
     component: ResetPasswordComponent,
+    data: {animation: 'resetpassword'}
   }
 ];

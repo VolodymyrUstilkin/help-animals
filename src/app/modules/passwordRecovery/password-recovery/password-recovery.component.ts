@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { fromEvent, Observable, Subscription, throwError } from 'rxjs';
+import { fromEvent, Subscription, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { PasswordRecoveryService } from 'src/app/core/services/password-recovery/password-recovery.service';
 
@@ -40,8 +40,7 @@ export class PasswordRecoveryComponent implements OnInit, AfterViewInit, OnDestr
             this.responseFromServer = 'error';
             return throwError(error);
           })
-        ).subscribe((response) => {
-          console.log(response);
+        ).subscribe(() => {
           this.responseFromServer = 'success';
         });
         this.resetForm();

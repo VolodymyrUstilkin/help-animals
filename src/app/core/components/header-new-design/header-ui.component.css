@@ -28,14 +28,12 @@
   font-weight: 600;
 }
 
-.header__menu {
-}
 .menu__icon {
   display: none;
 }
 
 
-@media screen and (max-width: 930px) {
+@media screen and (max-width: 960px) {
 
   .menu__icon {
       z-index: 5;

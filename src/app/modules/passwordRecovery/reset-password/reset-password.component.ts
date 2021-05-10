@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, of, Subscription, throwError, timer } from 'rxjs';
-import { catchError, delay, take } from 'rxjs/operators';
+import { catchError, delay} from 'rxjs/operators';
 import { PasswordRecoveryService } from 'src/app/core/services/password-recovery/password-recovery.service';
 
 @Component({

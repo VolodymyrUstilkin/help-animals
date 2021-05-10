@@ -1,6 +1,7 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IPasswordRecovery } from 'src/app/modules/passwordRecovery/password-recovery/model/password-recovery.interface';
 import { environment } from 'src/environments';
 
 @Injectable({
@@ -14,17 +15,17 @@ export class PasswordRecoveryService {
 
   constructor(private httpClient: HttpClient) {}
 
-  forogotPassword(email: string): Observable<any>{
+  forogotPassword(email: string): Observable<IPasswordRecovery>{
     const options = {
       params: {
         email,
       },
     };
 
-    return this.httpClient.post<any>(this.FORGOT_URL, '', options);
+    return this.httpClient.post<IPasswordRecovery>(this.FORGOT_URL, '', options);
   }
 
-  resetPassword(password: string, token: string): Observable<any>{
+  resetPassword(password: string, token: string): Observable<IPasswordRecovery>{
     const options = {
       params: {
         password,
@@ -32,6 +33,6 @@ export class PasswordRecoveryService {
       },
     };
 
-    return this.httpClient.post<any>(this.RESET_URL, '', options);
+    return this.httpClient.post<IPasswordRecovery>(this.RESET_URL, '', options);
   }
 }

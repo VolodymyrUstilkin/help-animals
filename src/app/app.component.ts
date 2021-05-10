@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   ngOnInit(): void {
     WebFont.load({
       google: {
-        families: ['Montserrat:wght@400;500;600;700;800;900&display=swap']
+        families: ['Montserrat:wght@400;500;600;700;800;900&display=swap', 'Orbitron:wght@500&display=swap']
       }
     });
   }
