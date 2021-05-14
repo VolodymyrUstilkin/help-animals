@@ -1,6 +1,8 @@
 <header class="header">
   <div class="header__container">
-    <a routerLink="home" class="header__logo" #logo [@initialLogoAnimation]="state">Logo</a>
+    <a routerLink="home" class="header__logo" #logo [@initialLogoAnimation]="state">
+      <img width="100%" height="100%" src="/assets/images/logo.svg" alt="Logo"/>
+    </a>
     <div class="header__menu">
       <div class="menu__icon" #burger [@initialMenuAnimation]="state">
         <span></span>

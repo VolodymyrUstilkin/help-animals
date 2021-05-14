@@ -18,11 +18,12 @@
 }
 
 .header__logo {
+  margin-left: 30px;
   border-radius: 50%;
   position: relative;
   z-index: 5;
-  width: 40px;
-  height: 40px;
+  width: 70px;
+  height: 70px;
   color: #fff;
   font-size: 2rem;
   font-weight: 600;
