@@ -157,7 +157,7 @@ export class AdminAnimalDetailsComponent implements OnDestroy {
     const rawFile = elem.files[0];
 
     const compressOptions = {
-      maxSizeMB: 1,
+      maxSizeMB: 0.09,
       useWebWorker: true
     };
 
