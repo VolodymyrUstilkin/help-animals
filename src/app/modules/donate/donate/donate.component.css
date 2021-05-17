@@ -195,6 +195,21 @@
   padding-top: 25px;
 }
 
+.list-container{
+  padding: 10px 0 0 20px;
+}
+
+.list-item {
+  text-align: justify;
+  padding-left: 5px;
+  list-style: disc;
+}
+
+.content__text {
+  text-align: justify;
+  padding-top: 20px;
+}
+
 
 @media screen and (max-width: 560px) {
   .card {
