@@ -1,28 +1,8 @@
 <div class="root" (window:resize)="updateMode()">
-<!--  <aside class="aside" *ngIf="asideNeedShow">-->
-<!--    <img class="main-page-aside-image" src="assets/images/main-page-image.jpg" alt="funny cat">-->
-<!--      <NavigationComponent></NavigationComponent>-->
-<!--    <app-nav-menu></app-nav-menu>-->
-<!--  </aside>-->
-
   <div class="main">
-<!--    <app-header>-->
-<!--      <app-nav-menu *ngIf="!asideNeedShow"></app-nav-menu>-->
-      <!-- <button type="button" style="background-color: aqua; width: 80px; height: 80px; display: block" *ngIf="!asideNeedShow">Nav menu from aside</button> -->
-<!--    </app-header>-->
-
-    <!-- <app-full-size-header></app-full-size-header> -->
     <app-header-ui>
       <app-navigation-ui></app-navigation-ui>
     </app-header-ui>
-
-
-    <!-- <header class="header background-color-default">
-      HeaderComponent WILL HERE (REMOVE AFTER COMPONENT CREATE) -->
-
-      <!--    <HeaderComponent showMenuButton="!asideNeedShow"></HeaderComponent>-->
-    <!-- </header> -->
-
     <div class="router-container" [@routeChangeAnimation]="getRouteAnimationState(outlet)" >
       <router-outlet #outlet="outlet"></router-outlet>
     </div>
